@@ -1,7 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.alma">
+   
+   <uses-permission android:name="android.permission.INTERNET" />
+   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+   
    <application
-        android:label="alma"
+        android:label="Alma"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

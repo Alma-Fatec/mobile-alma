@@ -38,8 +38,8 @@ O app pode ser executado diretamente em smartphones físicos via depuração USB
 
 ## Warning
 
-``` Flutter 2.10.2 * channel stable ```
-``` Tools * Dart 2.16.1 * DevTools 2.9.2 ```
+``` Flutter 3.0.5 * channel stable ```
+``` Tools * Dart 2.17.1 ```
 
 **IDE:** VSCode(The Best)
 
