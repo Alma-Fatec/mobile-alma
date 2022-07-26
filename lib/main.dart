@@ -1,4 +1,5 @@
-import 'package:alma/pages/home/home_page.dart';
+import 'package:alma/pages/login_page.dart';
+import 'package:alma/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,10 +14,23 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Alma',
       theme: ThemeData(
-        primarySwatch: Colors.lightBlue,
-        primaryColor: Colors.lightBlue,
+        primaryColor: AlmaColors.blueAlma,
+        scaffoldBackgroundColor: AlmaColors.whiteAlma,
+        appBarTheme: const AppBarTheme(
+          toolbarHeight: 70,
+          backgroundColor: AlmaColors.blueAlma,
+          centerTitle: false,
+          elevation: 0,
+          shape: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(50.0),
+            ),
+          ),
+        ),
       ),
-      home: const HomePage(),
+      // TODO: Add Splash feature here
+      home: const LoginPage(),
     );
   }
 }
