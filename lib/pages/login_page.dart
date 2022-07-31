@@ -1,10 +1,10 @@
 import 'package:alma/blocs/login_bloc.dart';
-import 'package:alma/pages/dashboard.dart';
+import 'package:alma/pages/home_page/home_page.dart';
 import 'package:alma/utils/colors.dart';
 import 'package:alma/utils/nav.dart';
-import 'package:alma/widgets/CustomButton.dart';
-import 'package:alma/widgets/CustomText.dart';
-import 'package:alma/widgets/TopPage.dart';
+import 'package:alma/widgets/custom_button.dart';
+import 'package:alma/widgets/custom_text.dart';
+import 'package:alma/widgets/top_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -141,12 +141,15 @@ class _FormLoginState extends State<FormLogin> {
                     fontSize: 14,
                   ),
                 ),
-                TextButton(
-                  onPressed: () {},
-                  child: const CustomText(
-                    text: 'Esqueceu sua senha?',
-                    color: AlmaColors.whiteAlma,
-                    fontSize: 14,
+                Expanded(
+                  child: TextButton(
+                    onPressed: () {},
+                    child: const CustomText(
+                      text: 'Esqueceu sua senha?',
+                      color: AlmaColors.whiteAlma,
+                      fontSize: 14,
+                      textAlign: TextAlign.end,
+                    ),
                   ),
                 ),
               ],
@@ -184,7 +187,7 @@ class _FormLoginState extends State<FormLogin> {
     String token = await _bloc.login(email, password);
 
     if (token.isNotEmpty) {
-      push(context, const Dashboard());
+      pushReplace(context, const HomePage(), replace: true);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

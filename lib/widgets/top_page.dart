@@ -1,7 +1,7 @@
 import 'package:alma/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-import 'CustomText.dart';
+import 'custom_text.dart';
 
 class TopPage extends StatelessWidget {
   const TopPage({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class TopPage extends StatelessWidget {
                   bottomLeft: Radius.circular(173.0),
                 ),
                 child: Image.asset(
-                  'assets/classroom.jpg',
+                  'assets/images/classroom.jpg',
                   height: 350,
                   fit: BoxFit.cover,
                 ),
@@ -39,7 +39,7 @@ class TopPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset('assets/logo_alma.png'),
+                Image.asset('assets/images/logo_alma.png'),
                 const SizedBox(height: 10),
                 const CustomText(
                   text: 'ALMA',

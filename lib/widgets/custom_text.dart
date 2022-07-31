@@ -7,6 +7,7 @@ class CustomText extends StatelessWidget {
     this.color,
     this.fontSize = 18,
     this.fontWeight = FontWeight.normal,
+    this.fontFamily,
     this.textAlign,
   }) : super(key: key);
   final String text;
@@ -14,6 +15,7 @@ class CustomText extends StatelessWidget {
   final double fontSize;
   final FontWeight fontWeight;
   final TextAlign? textAlign;
+  final String? fontFamily;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class CustomText extends StatelessWidget {
         color: color,
         fontSize: fontSize,
         fontWeight: fontWeight,
+        fontFamily: fontFamily
       ),
     );
   }

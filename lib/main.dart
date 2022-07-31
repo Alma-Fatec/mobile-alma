@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Alma',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: AlmaColors.blueAlma,
         scaffoldBackgroundColor: AlmaColors.whiteAlma,
