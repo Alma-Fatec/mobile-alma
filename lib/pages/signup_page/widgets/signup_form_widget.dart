@@ -154,6 +154,11 @@ class _SignupFormState extends State<SignupForm> {
       return;
     }
 
+    if (passwordController!.text != checkPasswordController!.text) {
+      showSnackbar(context, "As senhas devem ser iguais");
+      return;
+    }
+
     try {
       User user = _fillUserModel();
       await _bloc.signup(user);
