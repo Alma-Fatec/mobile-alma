@@ -1,5 +1,6 @@
 import 'package:alma/blocs/login_bloc.dart';
 import 'package:alma/pages/home_page/home_page.dart';
+import 'package:alma/pages/signup_page/signup_page.dart';
 import 'package:alma/utils/colors.dart';
 import 'package:alma/utils/nav.dart';
 import 'package:alma/widgets/custom_button.dart';
@@ -134,7 +135,7 @@ class _FormLoginState extends State<FormLogin> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () => push(context, const SignupPage()),
                   child: const CustomText(
                     text: 'Não tem uma conta?',
                     color: AlmaColors.whiteAlma,
