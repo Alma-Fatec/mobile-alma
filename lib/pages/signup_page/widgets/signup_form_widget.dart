@@ -63,7 +63,7 @@ class _SignupFormState extends State<SignupForm> {
           const SizedBox(height: 18),
           CustomTextFormField(
             label: "Telefone",
-            hint: "(XX) 00000-0000",
+            hint: "+55 (XX) 00000-0000",
             textEditingController: phoneController,
             validator: (value) =>
                 _checkValueIsNotEmpty(value, "Digite seu telefone"),

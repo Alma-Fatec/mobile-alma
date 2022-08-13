@@ -5,7 +5,6 @@ import 'package:alma/repositories/user_repository.dart';
 
 class SignupBloc {
   final streamController = StreamController<bool>();
-  final toastController = StreamController<String>();
 
   Future signup(User user) async {
     try {
@@ -15,10 +14,8 @@ class SignupBloc {
       await _repository.signup(user);
 
       streamController.sink.add(false);
-      toastController.sink.add("Cadastro realizado com sucesso");
     } catch (e) {
       streamController.sink.add(false);
-      toastController.sink.add(e.toString());
       rethrow;
     }
   }
