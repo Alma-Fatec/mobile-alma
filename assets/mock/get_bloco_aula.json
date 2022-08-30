@@ -1,0 +1,9 @@
+{
+    "id": 1,
+    "titulo": "Praticando o alfabeto",
+    "descricao": "",
+    "ordem": 1,
+    "arquivo": "assets/images/numerais.jpg",
+    "aulas": [ 1, 2, 3, 4 ],
+    "alunos": [ 1, 2, 3, 4]
+}

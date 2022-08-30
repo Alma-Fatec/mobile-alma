@@ -1,0 +1,42 @@
+{
+    "id": 1,
+    "titulo": "",
+    "descricao": "",
+    "ordem": 1,
+    "arquivo": "",
+    "atividades": [
+        {
+            "id": 1,
+            "enunciado": "string",
+            "file": "url",
+            "tipo_atividade": "ALTERNATIVAS",
+            "hidden_text": "",
+            "alternativas": [
+                {
+                    "id": 1,
+                    "text": "string",
+                    "file": "url",
+                    "is_correct": false
+                },
+                {
+                    "id": 2,
+                    "text": "string",
+                    "file": "url",
+                    "is_correct": false
+                },
+                {
+                    "id": 3,
+                    "text": "string",
+                    "file": "url",
+                    "is_correct": false
+                },
+                {
+                    "id": 4,
+                    "text": "string",
+                    "file": "url",
+                    "is_correct": true
+                }
+            ]
+        }
+    ]
+}

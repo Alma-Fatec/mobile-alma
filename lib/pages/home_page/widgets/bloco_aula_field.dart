@@ -1,9 +1,12 @@
+import 'package:alma/blocs/class_block_bloc.dart';
+import 'package:alma/models/class_block/class_block.dart';
 import 'package:alma/utils/colors.dart';
 import 'package:alma/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class BlocoAulaField extends StatelessWidget {
-  const BlocoAulaField({Key? key}) : super(key: key);
+  BlocoAulaField({Key? key}) : super(key: key);
+  final ClassBlockBloc _classBloc = ClassBlockBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +24,7 @@ class BlocoAulaField extends StatelessWidget {
           margin: const EdgeInsets.only(top: 5),
           constraints: const BoxConstraints(
             minWidth: 370,
-            minHeight: 295,
+            minHeight: 280,
           ),
           decoration: BoxDecoration(
               color: AlmaColors.blueAlma,
@@ -33,31 +36,42 @@ class BlocoAulaField extends StatelessWidget {
                   offset: Offset(0.0, 0.75),
                 )
               ]),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(8),
-                  topRight: Radius.circular(8),
-                ),
-                child: Image.asset(
-                  "assets/images/numerais.jpg",
-                  height: 250,
-                  fit: BoxFit.fill,
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 8, left: 8),
-                child: const CustomText(
-                  text: "Praticando o Alfabeto",
-                  fontFamily: "Montserrat",
-                  fontSize: 20,
-                  fontWeight: FontWeight.w900,
-                  color: AlmaColors.whiteAlma,
-                ),
-              ),
-            ],
+          child: FutureBuilder<ClassBlock?>(
+            future: _classBloc.getClassBlockByStudent(),
+            builder: (context, snapshot) {
+
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              }
+
+              ClassBlock? classBlock = snapshot.data;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(8),
+                      topRight: Radius.circular(8),
+                    ),
+                    child: Image.network(
+                      classBlock!.file!,
+                      width: 370,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 8, left: 8, bottom: 8),
+                    child: CustomText(
+                      text: classBlock.title!,
+                      fontFamily: "Montserrat",
+                      fontSize: 20,
+                      fontWeight: FontWeight.w900,
+                      color: AlmaColors.whiteAlma,
+                    ),
+                  ),
+                ],
+              );
+            }
           ),
         ),
         Container(

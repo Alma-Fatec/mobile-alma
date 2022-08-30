@@ -34,11 +34,11 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              SizedBox(height: 42),
+            children:  [
+              const SizedBox(height: 42),
               BlocoAulaField(),
-              SizedBox(height: 39),
-              AulasRecentesField(),
+              const SizedBox(height: 39),
+              const AulasRecentesField(),
             ],
           ),
         ),

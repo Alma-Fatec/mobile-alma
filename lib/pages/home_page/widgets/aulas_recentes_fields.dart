@@ -22,7 +22,7 @@ class AulasRecentesField extends StatelessWidget {
           height: 130,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            itemCount: 3,
+            itemCount: 1,
             itemBuilder: ((context, index) {
               return Container(
                 width: 134,
