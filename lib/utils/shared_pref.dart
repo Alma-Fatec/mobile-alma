@@ -15,4 +15,9 @@ class SharedPref {
     final _prefs = await SharedPreferences.getInstance();
     await _prefs.remove(key);
   }
+
+  Future<bool> constain(String key) async {
+    final _prefs = await SharedPreferences.getInstance();
+    return _prefs.containsKey(key);
+  }
 }

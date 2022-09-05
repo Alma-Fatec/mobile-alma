@@ -7,4 +7,5 @@ class AlmaColors {
   static const lightGreenAlma = Color(0xFF75F181);
   static const primaryTextColorAlma = Color(0xFF000000);
   static const secondaryTextColorAlma = Color(0xFF565656);
+  static const grayBackgroundAlma = Color(0xFFF2F2F2);
 }
