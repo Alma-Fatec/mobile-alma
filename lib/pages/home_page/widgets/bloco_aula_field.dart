@@ -6,6 +6,7 @@ import 'package:alma/utils/nav.dart';
 import 'package:alma/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class BlocoAulaField extends StatelessWidget {
   BlocoAulaField({Key? key}) : super(key: key);
   final ClassBlockBloc _classBloc = ClassBlockBloc();

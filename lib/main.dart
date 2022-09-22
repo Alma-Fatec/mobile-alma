@@ -1,5 +1,3 @@
-import 'package:alma/models/classroom/classroom.dart';
-import 'package:alma/pages/classroom_page/clasroom_page.dart';
 import 'package:alma/pages/home_page/home_page.dart';
 import 'package:alma/pages/login_page.dart';
 import 'package:alma/utils/colors.dart';
