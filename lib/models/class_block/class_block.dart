@@ -1,5 +1,5 @@
 import 'package:alma/models/classroom/classroom.dart';
-import 'package:alma/models/user/User.dart';
+import 'package:alma/models/user/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'class_block.g.dart';
 

@@ -5,9 +5,9 @@ import 'package:alma/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class ClassroomPage extends StatelessWidget {
-  ClassRoom classRoom;
+  final ClassRoom classRoom;
 
-  ClassroomPage({
+  const ClassroomPage({
     Key? key,
     required this.classRoom,
   }) : super(key: key);
@@ -51,10 +51,10 @@ class ClassroomPage extends StatelessWidget {
                 children: [
                   CustomButton(
                     onPressed: () {},
-                    child: Container(
+                    child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Stack(
-                        children: [
+                        children: const [
                           Center(child: Text("AVANÇAR")),
                           Positioned(
                             top: 0,
@@ -70,7 +70,7 @@ class ClassroomPage extends StatelessWidget {
                     ),
                     showProgress: false,
                   ),
-                  SizedBox(height: 18),
+                  const SizedBox(height: 18),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: ClipRRect(
@@ -95,9 +95,9 @@ class ClassroomPage extends StatelessWidget {
 }
 
 class ClassroomBody extends StatelessWidget {
-  ClassRoom classRoom;
+  final ClassRoom classRoom;
 
-  ClassroomBody({
+  const ClassroomBody({
     Key? key,
     required this.classRoom,
   }) : super(key: key);
