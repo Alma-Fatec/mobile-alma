@@ -7,7 +7,7 @@ class CustomBody extends StatelessWidget {
   final double topMargin;
   const CustomBody({
     Key? key,
-    required this.child,
+    required final this.child,
     this.leftMargin = 20,
     this.righMargin = 20,
     this.topMargin = 46,
