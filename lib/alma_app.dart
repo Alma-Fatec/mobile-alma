@@ -1,14 +1,12 @@
+import 'package:alma/initialise_application.dart';
 import 'package:alma/src/api/alma_api.dart';
+import 'package:alma/src/api/alma_interceptor_token.dart';
 import 'package:alma/src/blocs/application.dart';
-import 'package:alma/src/pages/home_page/home_page.dart';
-import 'package:alma/src/pages/login.dart';
-import 'package:alma/src/pages/splash_page.dart';
 import 'package:alma/src/repositories/class_block_repository.dart';
 import 'package:alma/src/repositories/user_repository.dart';
 import 'package:alma/src/services/classblock_service.dart';
 import 'package:alma/src/services/user_service.dart';
 import 'package:alma/src/utils/colors.dart';
-import 'package:alma/src/utils/shared_pref.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,8 +17,9 @@ class AlmaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final almaApi = AlmaApi(Dio());
-    final classblockService = ClassblockService(classBlockRepository: ClassBlockRepository());
+    final dio = Dio()..interceptors.add(AlmaInterceptorToken());
+    final almaApi = AlmaApi(dio);
+    final classblockService = ClassblockService(classBlockRepository: ClassBlockRepository(api: almaApi));
     final userService = UserService(userRepository: UserRepository(almaApi: almaApi));
     final applicationBloc = ApplicationBloc(userService: userService);
 
@@ -51,16 +50,7 @@ class AlmaApp extends StatelessWidget {
               ),
             ),
           ),
-          home: FutureBuilder<bool>(
-            future: SharedPref().constain("tokenSession"),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const SplashScreen();
-              }
-
-              return snapshot.data ?? false ? const HomePage() : const LoginPage();
-            },
-          ),
+          home: const InitialiseApplication(),
         ),
       ),
     );
