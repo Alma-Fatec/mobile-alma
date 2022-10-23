@@ -1,4 +1,5 @@
 import 'package:alma/src/api/alma_api.dart';
+import 'package:alma/src/api/alma_interceptor_token.dart';
 import 'package:alma/src/blocs/application.dart';
 import 'package:alma/src/pages/home_page/home_page.dart';
 import 'package:alma/src/pages/login.dart';
@@ -19,8 +20,9 @@ class AlmaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final almaApi = AlmaApi(Dio());
-    final classblockService = ClassblockService(classBlockRepository: ClassBlockRepository());
+    final dio = Dio()..interceptors.add(AlmaInterceptorToken());
+    final almaApi = AlmaApi(dio);
+    final classblockService = ClassblockService(classBlockRepository: ClassBlockRepository(api: almaApi));
     final userService = UserService(userRepository: UserRepository(almaApi: almaApi));
     final applicationBloc = ApplicationBloc(userService: userService);
 
