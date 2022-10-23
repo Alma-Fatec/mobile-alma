@@ -18,7 +18,9 @@ class UserRepository {
   Future<AuthUser> login(String email, String password) async {
     try {
       AuthUser authUser = await almaApi.login(User(email: email, password: password));
-      await SharedPref().save("tokenSession", authUser.token);
+      final pref = SharedPref();
+      await pref.save('token', authUser.token);
+      await pref.save('user_id', authUser.user!.id);
 
       return authUser;
     } catch (e) {

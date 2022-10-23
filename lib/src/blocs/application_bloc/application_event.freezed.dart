@@ -18,18 +18,21 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ApplicationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initialise,
     required TResult Function(String email, String password) login,
     required TResult Function(User user) signup,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialise,
     TResult? Function(String email, String password)? login,
     TResult? Function(User user)? signup,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialise,
     TResult Function(String email, String password)? login,
     TResult Function(User user)? signup,
     required TResult orElse(),
@@ -37,18 +40,21 @@ mixin _$ApplicationEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Initialise value) initialise,
     required TResult Function(Login value) login,
     required TResult Function(Signup value) signup,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initialise value)? initialise,
     TResult? Function(Login value)? login,
     TResult? Function(Signup value)? signup,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initialise value)? initialise,
     TResult Function(Login value)? login,
     TResult Function(Signup value)? signup,
     required TResult orElse(),
@@ -72,6 +78,114 @@ class _$ApplicationEventCopyWithImpl<$Res, $Val extends ApplicationEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$InitialiseCopyWith<$Res> {
+  factory _$$InitialiseCopyWith(
+          _$Initialise value, $Res Function(_$Initialise) then) =
+      __$$InitialiseCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$InitialiseCopyWithImpl<$Res>
+    extends _$ApplicationEventCopyWithImpl<$Res, _$Initialise>
+    implements _$$InitialiseCopyWith<$Res> {
+  __$$InitialiseCopyWithImpl(
+      _$Initialise _value, $Res Function(_$Initialise) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$Initialise implements Initialise {
+  const _$Initialise();
+
+  @override
+  String toString() {
+    return 'ApplicationEvent.initialise()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$Initialise);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialise,
+    required TResult Function(String email, String password) login,
+    required TResult Function(User user) signup,
+  }) {
+    return initialise();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialise,
+    TResult? Function(String email, String password)? login,
+    TResult? Function(User user)? signup,
+  }) {
+    return initialise?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialise,
+    TResult Function(String email, String password)? login,
+    TResult Function(User user)? signup,
+    required TResult orElse(),
+  }) {
+    if (initialise != null) {
+      return initialise();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initialise value) initialise,
+    required TResult Function(Login value) login,
+    required TResult Function(Signup value) signup,
+  }) {
+    return initialise(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initialise value)? initialise,
+    TResult? Function(Login value)? login,
+    TResult? Function(Signup value)? signup,
+  }) {
+    return initialise?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initialise value)? initialise,
+    TResult Function(Login value)? login,
+    TResult Function(Signup value)? signup,
+    required TResult orElse(),
+  }) {
+    if (initialise != null) {
+      return initialise(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Initialise implements ApplicationEvent {
+  const factory Initialise() = _$Initialise;
 }
 
 /// @nodoc
@@ -145,6 +259,7 @@ class _$Login implements Login {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initialise,
     required TResult Function(String email, String password) login,
     required TResult Function(User user) signup,
   }) {
@@ -154,6 +269,7 @@ class _$Login implements Login {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialise,
     TResult? Function(String email, String password)? login,
     TResult? Function(User user)? signup,
   }) {
@@ -163,6 +279,7 @@ class _$Login implements Login {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialise,
     TResult Function(String email, String password)? login,
     TResult Function(User user)? signup,
     required TResult orElse(),
@@ -176,6 +293,7 @@ class _$Login implements Login {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Initialise value) initialise,
     required TResult Function(Login value) login,
     required TResult Function(Signup value) signup,
   }) {
@@ -185,6 +303,7 @@ class _$Login implements Login {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initialise value)? initialise,
     TResult? Function(Login value)? login,
     TResult? Function(Signup value)? signup,
   }) {
@@ -194,6 +313,7 @@ class _$Login implements Login {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initialise value)? initialise,
     TResult Function(Login value)? login,
     TResult Function(Signup value)? signup,
     required TResult orElse(),
@@ -276,6 +396,7 @@ class _$Signup implements Signup {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initialise,
     required TResult Function(String email, String password) login,
     required TResult Function(User user) signup,
   }) {
@@ -285,6 +406,7 @@ class _$Signup implements Signup {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialise,
     TResult? Function(String email, String password)? login,
     TResult? Function(User user)? signup,
   }) {
@@ -294,6 +416,7 @@ class _$Signup implements Signup {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialise,
     TResult Function(String email, String password)? login,
     TResult Function(User user)? signup,
     required TResult orElse(),
@@ -307,6 +430,7 @@ class _$Signup implements Signup {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Initialise value) initialise,
     required TResult Function(Login value) login,
     required TResult Function(Signup value) signup,
   }) {
@@ -316,6 +440,7 @@ class _$Signup implements Signup {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initialise value)? initialise,
     TResult? Function(Login value)? login,
     TResult? Function(Signup value)? signup,
   }) {
@@ -325,6 +450,7 @@ class _$Signup implements Signup {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initialise value)? initialise,
     TResult Function(Login value)? login,
     TResult Function(Signup value)? signup,
     required TResult orElse(),
