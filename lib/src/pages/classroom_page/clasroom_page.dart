@@ -1,5 +1,7 @@
 import 'package:alma/src/models/models.dart';
+import 'package:alma/src/pages/task.dart';
 import 'package:alma/src/utils/colors.dart';
+import 'package:alma/src/utils/nav.dart';
 import 'package:alma/src/widgets/custom_button.dart';
 import 'package:alma/src/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +52,7 @@ class ClassroomPage extends StatelessWidget {
               child: Column(
                 children: [
                   CustomButton(
-                    onPressed: () {},
+                    onPressed: () => push(context, TaskPage(type: 'choose')),
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Stack(

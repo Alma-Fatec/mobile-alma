@@ -7,10 +7,18 @@ class UserService {
   final UserRepository _userRepository;
 
   Future<AuthUser> login(String email, String password) async {
-    return await _userRepository.login(email, password);
+    try {
+      return await _userRepository.login(email, password);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<User> signup(User user) async {
-    return await _userRepository.signup(user);
+    try {
+      return await _userRepository.signup(user);
+    } catch (e) {
+      rethrow;
+    }
   }
 }

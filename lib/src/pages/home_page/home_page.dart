@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children:  [
               const SizedBox(height: 42),
-              BlocoAulaField(),
+              Center(child: BlocoAulaField()),
               const SizedBox(height: 39),
               const AulasRecentesField(),
             ],

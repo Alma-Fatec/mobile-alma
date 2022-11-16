@@ -19,7 +19,7 @@ class CustomTextFormField extends StatelessWidget {
     Key? key,
     @required this.label,
     @required this.hint,
-    @required this.textEditingController,
+    this.textEditingController,
     this.validator,
     this.keyboardType,
     this.suffixIcon,

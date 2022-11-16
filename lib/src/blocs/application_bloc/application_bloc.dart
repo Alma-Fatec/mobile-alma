@@ -26,9 +26,10 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
   }
 
   Future<void> _mapInitialiseToState(Initialise event, Emitter<ApplicationState> emit) async {
-    final hasToken = await SharedPref().read('token') != null;
+    final hasToken = await SharedPref().constain('token');
     if (!hasToken) {
       emit(const Error('Login is needed'));
+      return;
     }
 
     emit(const Success());

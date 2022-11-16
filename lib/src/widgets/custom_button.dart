@@ -13,7 +13,7 @@ class CustomButton extends StatelessWidget {
     this.height,
   }) : super(key: key);
 
-  final Function onPressed;
+  final void Function()? onPressed;
   final Widget child;
   final Color? color;
   final double? elevation;
@@ -27,9 +27,7 @@ class CustomButton extends StatelessWidget {
       width: width ?? MediaQuery.of(context).size.width,
       height: height ?? 40,
       child: ElevatedButton(
-        onPressed: () {
-          onPressed();
-        },
+        onPressed: onPressed,
         child: showProgress
             ? const SizedBox(
                 height: 25,

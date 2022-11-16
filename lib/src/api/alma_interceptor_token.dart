@@ -36,6 +36,8 @@ class AlmaInterceptorToken extends InterceptorsWrapper {
         return handler.resolve(req);
       }
     }
+
+    super.onError(err, handler);
   }
 
   Future<void> _loadToken() async {

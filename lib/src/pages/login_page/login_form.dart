@@ -116,7 +116,9 @@ class _FormApplicationState extends State<FormLogin> {
                 ),
                 Expanded(
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      pushReplace(context, const HomePage(), replace: true);
+                    },
                     child: const CustomText(
                       text: 'Esqueceu sua senha?',
                       color: AlmaColors.whiteAlma,

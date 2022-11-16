@@ -9,4 +9,8 @@ class ClassblockService {
   Future<ClassBlock> getClassBlockByStudent() async {
     return await _classBlockRepository.getClassBlockByStudent();
   }
+
+  Future<List<ClassBlock>> getAllClassBlock() async {
+    return await _classBlockRepository.getAllClassBlock();
+  }
 }
