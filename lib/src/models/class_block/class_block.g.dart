@@ -7,25 +7,24 @@ part of 'class_block.dart';
 // **************************************************************************
 
 ClassBlock _$ClassBlockFromJson(Map<String, dynamic> json) => ClassBlock(
+      id: json['id'] as String?,
       title: json['title'] as String?,
       description: json['description'] as String?,
-      sequence: json['sequence'] as int?,
-      file: json['file'] as String?,
-      classroom: (json['classroom'] as List<dynamic>?)
-          ?.map((e) => ClassRoom.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      students: (json['students'] as List<dynamic>?)
+      cover: json['cover'] as String?,
+      createdAt: json['createdAt'] as String?,
+      createdBy: json['created_by'] as String?,
+      users: (json['users'] as List<dynamic>?)
           ?.map((e) => User.fromJson(e as Map<String, dynamic>))
           .toList(),
-    )..id = json['id'] as int?;
+    );
 
 Map<String, dynamic> _$ClassBlockToJson(ClassBlock instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'description': instance.description,
-      'sequence': instance.sequence,
-      'file': instance.file,
-      'classroom': instance.classroom,
-      'students': instance.students,
+      'cover': instance.cover,
+      'createdAt': instance.createdAt,
+      'created_by': instance.createdBy,
+      'users': instance.users,
     };

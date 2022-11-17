@@ -10,10 +10,7 @@ abstract class AlmaApi {
   factory AlmaApi(Dio dio, {String baseUrl}) = _AlmaApi;
 
   @GET("/classesBlock")
-  Future<List<ClassBlock>> getAllClassesBlockPaginated(
-    @Query("page") int page,
-    @Query("limit") int limit,
-  );
+  Future<PaginatedResult<ClassBlock>> getAllClassesBlockPaginated(@Query('') PaginatedRequest request);
 
   @POST("/users")
   Future<User> signup(@Body() User user);

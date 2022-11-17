@@ -5,15 +5,18 @@ part 'class_block.g.dart';
 
 @JsonSerializable()
 class ClassBlock {
-  int? id;
+  String? id;
   String? title;
   String? description;
-  int? sequence;
-  String? file;
-  List<ClassRoom>? classroom;
-  List<User>? students;
+  String? cover;
+  String? createdAt;
 
-  ClassBlock({this.title, this.description, this.sequence, this.file, this.classroom, this.students});
+  @JsonKey(name: 'created_by')
+  String? createdBy;
+
+  List<User>? users;
+
+  ClassBlock({this.id, this.title, this.description, this.cover, this.createdAt, this.createdBy, this.users});
 
   factory ClassBlock.fromJson(Map<String, dynamic> json) => _$ClassBlockFromJson(json);
 

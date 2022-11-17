@@ -1,8 +1,6 @@
-import 'package:alma/src/blocs/classblock.dart';
-import 'package:alma/src/pages/classroom_page/clasroom_page.dart';
+import 'package:alma/src/blocs/classblock_bloc/classblock_bloc.dart';
 import 'package:alma/src/services/classblock_service.dart';
 import 'package:alma/src/utils/colors.dart';
-import 'package:alma/src/utils/nav.dart';
 import 'package:alma/src/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,53 +15,49 @@ class BlocoAulaField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _bloc = ClassBlockBloc(classblockService: Provider.of<ClassblockService>(context, listen: false));
-    return BlocProvider(
-      create: (context) => _bloc..add(const LoadClassblock()),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const CustomText(
-            text: "Bloco de aula:",
-            fontFamily: "Montserrat",
-            fontSize: 16,
-            fontWeight: FontWeight.w900,
-            color: AlmaColors.secondaryTextColorAlma,
-          ),
-          InkWell(
-            onTap: () => push(context, ClassroomPage(classRoom: (_bloc.state as Loaded).classBlock.classroom![0])),
-            child: Container(
-              margin: const EdgeInsets.only(top: 5),
-              constraints: const BoxConstraints(
-                minWidth: 370,
-                minHeight: 280,
+    return BlocConsumer<ClassBlockBloc, ClassblockState>(
+        bloc: _bloc..add(const LoadClassblock()),
+        listener: (context, state) => {
+              // TODO(siqleomei): Send to class room screen
+            },
+        builder: (context, state) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const CustomText(
+                text: "Bloco de aula:",
+                fontFamily: "Montserrat",
+                fontSize: 16,
+                fontWeight: FontWeight.w900,
+                color: AlmaColors.secondaryTextColorAlma,
               ),
-              decoration: BoxDecoration(
-                color: AlmaColors.blueAlma,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black54,
-                    blurRadius: 15.0,
-                    offset: Offset(0.0, 0.75),
-                  )
-                ],
+              InkWell(
+                onTap: () => {},
+                child: Container(
+                  margin: const EdgeInsets.only(top: 5),
+                  constraints: const BoxConstraints(
+                    minWidth: 370,
+                    minHeight: 280,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AlmaColors.blueAlma,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black54,
+                        blurRadius: 15.0,
+                        offset: Offset(0.0, 0.75),
+                      )
+                    ],
+                  ),
+                  child: state is Loaded ? _showClassblock(state) : const CircularProgressIndicator(),
+                ),
               ),
-              child: BlocBuilder<ClassBlockBloc, ClassblockState>(
-                builder: (BuildContext context, ClassblockState state) {
-                  if (state is Loaded) {
-                    return _showClassblock(state);
-                  }
-
-                  return const CircularProgressIndicator();
-                },
-              ),
-            ),
-          ),
-          _progressTitle(),
-          _showProgress(),
-        ],
-      ),
-    );
+              _progressTitle(),
+              _showProgress(),
+            ],
+          );
+        });
   }
 
   Column _showClassblock(Loaded loaded) {
@@ -76,11 +70,9 @@ class BlocoAulaField extends StatelessWidget {
             topLeft: Radius.circular(8),
             topRight: Radius.circular(8),
           ),
-          child: Image.network(
-            classBlock.file!,
-            width: 370,
-            fit: BoxFit.fill,
-          ),
+          child: classBlock.cover != null
+              ? Image.network(classBlock.cover!, width: 370, fit: BoxFit.fill)
+              : Image.asset('assets/images/placeholder-image.png', fit: BoxFit.fill, width: 370),
         ),
         Container(
           margin: const EdgeInsets.only(top: 8, left: 8, bottom: 8),

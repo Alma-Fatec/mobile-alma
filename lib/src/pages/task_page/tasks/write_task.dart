@@ -3,9 +3,8 @@ import 'package:alma/src/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 class WriteTask extends StatelessWidget {
-  WriteTask({Key? key, required this.onAnswerUpdated}) : super(key: key);
+  const WriteTask({Key? key, required this.onAnswerUpdated}) : super(key: key);
 
-  final TextEditingController _textController = TextEditingController();
   final void Function(bool? isCorrect) onAnswerUpdated;
 
   @override

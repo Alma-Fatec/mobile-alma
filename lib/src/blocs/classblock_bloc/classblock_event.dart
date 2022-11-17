@@ -1,8 +1,7 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'classblock_event.freezed.dart';
+part of 'classblock_bloc.dart';
 
 @freezed
 class ClassblockEvent with _$ClassblockEvent {
   const factory ClassblockEvent.loadClassblock() = LoadClassblock;
+  const factory ClassblockEvent.loadClassroomByBlockId(int blockId) = LoadClassroomByBlockId;
 }

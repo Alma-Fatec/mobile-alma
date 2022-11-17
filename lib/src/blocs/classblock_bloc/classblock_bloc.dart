@@ -1,8 +1,11 @@
-import 'package:alma/src/blocs/classblock_bloc/classblock_event.dart';
-import 'package:alma/src/blocs/classblock_bloc/classblock_state.dart';
 import 'package:alma/src/models/models.dart';
 import 'package:alma/src/services/classblock_service.dart';
 import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'classblock_event.dart';
+part 'classblock_state.dart';
+part 'classblock_bloc.freezed.dart';
 
 class ClassBlockBloc extends Bloc<ClassblockEvent, ClassblockState> {
   ClassBlockBloc({
@@ -19,10 +22,9 @@ class ClassBlockBloc extends Bloc<ClassblockEvent, ClassblockState> {
     }
   }
 
-
   Future<void> getClassBlockByStudent(Emitter<ClassblockState> emit) async {
     try {
-      ClassBlock classBlock = await classblockService.getClassBlockByStudent();
+      ClassBlock classBlock = (await classblockService.getAllClassBlock())[0];
       emit(Loaded(classBlock));
     } catch (e) {
       emit(const Error('Falha ao recuperar bloco de aula'));

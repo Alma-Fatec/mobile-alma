@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 
 class ClassBlockRepository {
   ClassBlockRepository({required this.api});
-  
+
   final AlmaApi api;
 
   Future<ClassBlock> getClassBlockByStudent() async {
@@ -19,6 +19,6 @@ class ClassBlockRepository {
   }
 
   Future<List<ClassBlock>> getAllClassBlock() async {
-    return await api.getAllClassesBlockPaginated(1, 10);
+    return (await api.getAllClassesBlockPaginated(const PaginatedRequest(page: 1, limit: 1))).data!;
   }
 }

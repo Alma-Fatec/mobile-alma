@@ -21,19 +21,14 @@ class _AlmaApi implements AlmaApi {
   String? baseUrl;
 
   @override
-  Future<List<ClassBlock>> getAllClassesBlockPaginated(
-    page,
-    limit,
-  ) async {
+  Future<PaginatedResult<ClassBlock>> getAllClassesBlockPaginated(
+      request) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'page': page,
-      r'limit': limit,
-    };
+    final queryParameters = <String, dynamic>{r'': request.toJson()};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<List<dynamic>>(_setStreamType<List<ClassBlock>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PaginatedResult<ClassBlock>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -45,9 +40,10 @@ class _AlmaApi implements AlmaApi {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    var value = _result.data!
-        .map((dynamic i) => ClassBlock.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = PaginatedResult<ClassBlock>.fromJson(
+      _result.data!,
+      (json) => ClassBlock.fromJson(json as Map<String, dynamic>),
+    );
     return value;
   }
 
