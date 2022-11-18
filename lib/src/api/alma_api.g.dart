@@ -21,33 +21,6 @@ class _AlmaApi implements AlmaApi {
   String? baseUrl;
 
   @override
-  Future<PaginatedResult<ClassBlock>> getAllClassesBlockPaginated(
-      request) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'': request.toJson()};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<PaginatedResult<ClassBlock>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/classesBlock',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = PaginatedResult<ClassBlock>.fromJson(
-      _result.data!,
-      (json) => ClassBlock.fromJson(json as Map<String, dynamic>),
-    );
-    return value;
-  }
-
-  @override
   Future<User> signup(user) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -92,6 +65,60 @@ class _AlmaApi implements AlmaApi {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = AuthUser.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<PaginatedResult<ClassBlock>> getClassesBlockByStudentPaginated(
+      request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'': request.toJson()};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PaginatedResult<ClassBlock>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/classesBlock',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PaginatedResult<ClassBlock>.fromJson(
+      _result.data!,
+      (json) => ClassBlock.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<PaginatedResult<ClassRoom>> getClassesByBlockIdPaginated(
+      request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'': request.toJson()};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PaginatedResult<ClassRoom>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/classes',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PaginatedResult<ClassRoom>.fromJson(
+      _result.data!,
+      (json) => ClassRoom.fromJson(json as Map<String, dynamic>),
+    );
     return value;
   }
 

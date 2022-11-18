@@ -1,4 +1,4 @@
-import 'package:alma/src/blocs/application.dart';
+import 'package:alma/src/blocs/application_bloc/application_bloc.dart';
 import 'package:alma/src/pages/home_page/home_page.dart';
 import 'package:alma/src/pages/signup.dart';
 import 'package:alma/src/utils/colors.dart';

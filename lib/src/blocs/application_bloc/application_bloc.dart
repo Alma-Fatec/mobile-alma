@@ -1,10 +1,14 @@
 import 'dart:async';
 
-import 'package:alma/src/blocs/application_bloc/application_event.dart';
-import 'package:alma/src/blocs/application_bloc/application_state.dart';
+import 'package:alma/src/models/models.dart';
 import 'package:alma/src/services/user_service.dart';
 import 'package:alma/src/utils/shared_pref.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'application_event.dart';
+part 'application_state.dart';
+part 'application_bloc.freezed.dart';
 
 class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
   ApplicationBloc({

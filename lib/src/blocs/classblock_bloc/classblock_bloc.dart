@@ -30,4 +30,13 @@ class ClassBlockBloc extends Bloc<ClassblockEvent, ClassblockState> {
       emit(const Error('Falha ao recuperar bloco de aula'));
     }
   }
+
+  Future<void> _mapClassBlockByBlockId(LoadClassroomByBlockId event, Emitter<ClassblockState> emit) async {
+    try {
+      ClassBlock classBlock = (await classblockService.getAllClassBlock())[0];
+      emit(Loaded(classBlock));
+    } catch (e) {
+      emit(const Error('Falha ao recuperar bloco de aula'));
+    }
+  }
 }

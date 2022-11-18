@@ -19,6 +19,12 @@ class ClassBlockRepository {
   }
 
   Future<List<ClassBlock>> getAllClassBlock() async {
-    return (await api.getAllClassesBlockPaginated(const PaginatedRequest(page: 1, limit: 1))).data!;
+    return (await api.getClassesBlockByStudentPaginated(
+      const ClassesBlockByStudentsPaginated(
+        page: 1,
+        limit: 1,
+        userId: '',
+      ),
+    )).data!;
   }
 }

@@ -1,6 +1,4 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'application_state.freezed.dart';
+part of 'application_bloc.dart';
 
 @freezed
 class ApplicationState with _$ApplicationState {

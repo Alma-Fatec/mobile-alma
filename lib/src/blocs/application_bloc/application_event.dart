@@ -1,7 +1,4 @@
-import 'package:alma/src/models/user/user.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'application_event.freezed.dart';
+part of 'application_bloc.dart';
 
 @freezed
 class ApplicationEvent with _$ApplicationEvent {

@@ -1,7 +1,7 @@
 import 'package:alma/initialise_application.dart';
 import 'package:alma/src/api/alma_api.dart';
 import 'package:alma/src/api/alma_interceptor_token.dart';
-import 'package:alma/src/blocs/application.dart';
+import 'package:alma/src/blocs/application_bloc/application_bloc.dart';
 import 'package:alma/src/repositories/class_block_repository.dart';
 import 'package:alma/src/repositories/user_repository.dart';
 import 'package:alma/src/services/classblock_service.dart';

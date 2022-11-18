@@ -1,4 +1,4 @@
-import 'package:alma/src/blocs/application.dart';
+import 'package:alma/src/blocs/application_bloc/application_bloc.dart';
 import 'package:alma/src/models/models.dart';
 import 'package:alma/src/utils/colors.dart';
 import 'package:alma/src/utils/snackbar.dart';
