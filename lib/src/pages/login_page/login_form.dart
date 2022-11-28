@@ -1,6 +1,7 @@
-import 'package:alma/src/blocs/application_bloc/application_bloc.dart';
+import 'package:alma/src/blocs/login_bloc/login_bloc.dart';
 import 'package:alma/src/pages/home_page/home_page.dart';
 import 'package:alma/src/pages/signup.dart';
+import 'package:alma/src/services/user_service.dart';
 import 'package:alma/src/utils/colors.dart';
 import 'package:alma/src/utils/nav.dart';
 import 'package:alma/src/utils/snackbar.dart';
@@ -21,115 +22,124 @@ class _FormApplicationState extends State<FormLogin> {
   final _ctrlPassword = TextEditingController();
   bool status = false;
 
+  late LoginBloc _loginBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _loginBloc = LoginBloc(userService: context.read<UserService>());
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(52.0),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const CustomText(
-                  text: 'Email',
-                  color: AlmaColors.whiteAlma,
-                ),
-                const SizedBox(height: 10),
-                Container(
-                  color: AlmaColors.whiteAlma,
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 10),
-                    child: TextFormField(
-                      controller: _ctrlEmail,
-                      validator: (s) => _validateEmail(s!),
-                      decoration: const InputDecoration(
-                        hintText: 'exemplo@email.com',
-                        border: InputBorder.none,
-                      ),
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 30),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const CustomText(
-                  text: 'Senha',
-                  color: AlmaColors.whiteAlma,
-                ),
-                const SizedBox(height: 10),
-                Container(
-                  color: AlmaColors.whiteAlma,
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 10),
-                    child: TextFormField(
-                      controller: _ctrlPassword,
-                      validator: (s) => _validatePassword(s!),
-                      decoration: const InputDecoration(
-                        hintText: '************',
-                        border: InputBorder.none,
-                        suffixIcon: Icon(Icons.lock, color: AlmaColors.blueAlma),
-                      ),
-                      keyboardType: TextInputType.text,
-                      obscureText: true,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 50),
-            BlocListener<ApplicationBloc, ApplicationState>(
-              listener: (context, state) {
-                if (state is Success) {
-                  pushReplace(context, const HomePage(), replace: true);
-                }
-
-                if (state is Error) {
-                  buttonStatus(false);
-                  showSnackbar(context, state.message);
-                }
-              },
-              child: CustomButton(
-                onPressed: () {
-                  _login(context);
-                },
-                showProgress: status,
-                child: const CustomText(text: 'Login'),
-                color: AlmaColors.darkBlueAlma,
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextButton(
-                  onPressed: () => push(context, const SignupPage()),
-                  child: const CustomText(
-                    text: 'Não tem uma conta?',
+    return BlocProvider.value(
+      value: _loginBloc,
+      child: Padding(
+        padding: const EdgeInsets.all(52.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CustomText(
+                    text: 'Email',
                     color: AlmaColors.whiteAlma,
-                    fontSize: 14,
                   ),
+                  const SizedBox(height: 10),
+                  Container(
+                    color: AlmaColors.whiteAlma,
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 10),
+                      child: TextFormField(
+                        controller: _ctrlEmail,
+                        validator: (s) => _validateEmail(s!),
+                        decoration: const InputDecoration(
+                          hintText: 'exemplo@email.com',
+                          border: InputBorder.none,
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 30),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CustomText(
+                    text: 'Senha',
+                    color: AlmaColors.whiteAlma,
+                  ),
+                  const SizedBox(height: 10),
+                  Container(
+                    color: AlmaColors.whiteAlma,
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 10),
+                      child: TextFormField(
+                        controller: _ctrlPassword,
+                        validator: (s) => _validatePassword(s!),
+                        decoration: const InputDecoration(
+                          hintText: '************',
+                          border: InputBorder.none,
+                          suffixIcon: Icon(Icons.lock, color: AlmaColors.blueAlma),
+                        ),
+                        keyboardType: TextInputType.text,
+                        obscureText: true,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 50),
+              BlocListener<LoginBloc, LoginState>(
+                listener: (context, state) {
+                  if (state is Success) {
+                    pushReplace(context, const HomePage(), replace: true);
+                  }
+
+                  if (state is Error) {
+                    buttonStatus(false);
+                    showSnackbar(context, state.message);
+                  }
+                },
+                child: CustomButton(
+                  onPressed: _login,
+                  showProgress: status,
+                  child: const CustomText(text: 'Login'),
+                  color: AlmaColors.darkBlueAlma,
                 ),
-                Expanded(
-                  child: TextButton(
-                    onPressed: () {
-                      pushReplace(context, const HomePage(), replace: true);
-                    },
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(
+                    onPressed: () => push(context, const SignupPage()),
                     child: const CustomText(
-                      text: 'Esqueceu sua senha?',
+                      text: 'Não tem uma conta?',
                       color: AlmaColors.whiteAlma,
                       fontSize: 14,
-                      textAlign: TextAlign.end,
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        pushReplace(context, const HomePage(), replace: true);
+                      },
+                      child: const CustomText(
+                        text: 'Esqueceu sua senha?',
+                        color: AlmaColors.whiteAlma,
+                        fontSize: 14,
+                        textAlign: TextAlign.end,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -149,7 +159,7 @@ class _FormApplicationState extends State<FormLogin> {
     return null;
   }
 
-  _login(BuildContext context) async {
+  _login() async {
     bool formOk = _formKey.currentState!.validate();
 
     if (!formOk) {
@@ -159,7 +169,7 @@ class _FormApplicationState extends State<FormLogin> {
     String email = _ctrlEmail.text;
     String password = _ctrlPassword.text;
 
-    BlocProvider.of<ApplicationBloc>(context).add(Login(email, password));
+    _loginBloc.add(LogIn(email, password));
     buttonStatus(true);
   }
 

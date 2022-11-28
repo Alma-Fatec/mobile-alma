@@ -1,5 +1,6 @@
-import 'package:alma/src/blocs/application_bloc/application_bloc.dart';
+import 'package:alma/src/blocs/signup_bloc/signup_bloc.dart';
 import 'package:alma/src/models/models.dart';
+import 'package:alma/src/services/user_service.dart';
 import 'package:alma/src/utils/colors.dart';
 import 'package:alma/src/utils/snackbar.dart';
 import 'package:alma/src/widgets/custom_button.dart';
@@ -26,109 +27,118 @@ class _SignupFormState extends State<SignupForm> {
   final TextEditingController? passwordController = TextEditingController();
   final TextEditingController? checkPasswordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final MaskTextInputFormatter phoneInputFormatter = MaskTextInputFormatter(
-    mask: '(##) #####-####'
-  );
+  final MaskTextInputFormatter phoneInputFormatter = MaskTextInputFormatter(mask: '(##) #####-####');
   bool status = false;
+
+  late SignupBloc _signupBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _signupBloc = SignupBloc(userService: context.read<UserService>());
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          const SizedBox(height: 32),
-          CustomTextFormField(
-            label: "Nome",
-            hint: "João",
-            textEditingController: nameController,
-            validator: (value) => _checkValueIsNotEmpty(value, "Digite seu nome completo"),
-          ),
-          const SizedBox(height: 18),
-          CustomTextFormField(
-            label: "Nome social",
-            hint: "João",
-            textEditingController: socialnameController,
-          ),
-          const SizedBox(height: 18),
-          CustomTextFormField(
-            label: "CPF",
-            hint: "XXX.XXX.XXX-XX",
-            textEditingController: cpfController,
-            validator: _checkCpf,
-            keyboardType: TextInputType.number,
-            maxLength: 14,
-            inputFormatters: [
-              MaskTextInputFormatter(mask: '###.###.###-##'),
-            ],
-          ),
-          const SizedBox(height: 18),
-          CustomTextFormField(
-            label: "Telefone",
-            hint: "(XX) 00000-0000",
-            textEditingController: phoneController,
-            validator: (value) => _checkValueIsNotEmpty(value, "Digite seu telefone"),
-            keyboardType: TextInputType.phone,
-            inputFormatters: [phoneInputFormatter],
-          ),
-          const SizedBox(height: 18),
-          CustomTextFormField(
-            label: "Email",
-            hint: "joao@email.com.br",
-            textEditingController: emailController,
-            validator: (value) => _checkValueIsNotEmpty(value, "Digite seu email"),
-            keyboardType: TextInputType.emailAddress,
-          ),
-          const SizedBox(height: 18),
-          CustomTextFormField(
-            label: "Senha",
-            hint: "********",
-            textEditingController: passwordController,
-            validator: (value) => _checkValueIsNotEmpty(value, "Digite sua senha"),
-            keyboardType: TextInputType.text,
-            suffixIcon: const Icon(
-              Icons.lock,
-              color: AlmaColors.blueAlma,
-              size: 24,
+    return BlocProvider.value(
+      value: _signupBloc,
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            const SizedBox(height: 32),
+            CustomTextFormField(
+              label: "Nome",
+              hint: "João",
+              textEditingController: nameController,
+              validator: (value) => _checkValueIsNotEmpty(value, "Digite seu nome completo"),
             ),
-            obscureText: true,
-          ),
-          const SizedBox(height: 18),
-          CustomTextFormField(
-            label: "Confirme sua senha",
-            hint: "********",
-            textEditingController: checkPasswordController,
-            validator: (value) => _checkValueIsNotEmpty(value, "Digite sua senha"),
-            keyboardType: TextInputType.text,
-            suffixIcon: const Icon(
-              Icons.lock,
-              color: AlmaColors.blueAlma,
-              size: 24,
+            const SizedBox(height: 18),
+            CustomTextFormField(
+              label: "Nome social",
+              hint: "João",
+              textEditingController: socialnameController,
             ),
-            obscureText: true,
-          ),
-          const SizedBox(height: 18),
-          BlocListener<ApplicationBloc, ApplicationState>(
-            listener: (context, state) {
-              if (state is Success) {
-                Navigator.of(context).pop();
-                showSnackbar(context, "Cadastro realizado com sucesso");
-              }
-
-              if (state is Error) {
-                showSnackbar(context, state.message);
-                buttonStatus(false);
-              }
-            },
-            child: CustomButton(
-              onPressed: () => _sigup(context),
-              child: const CustomText(text: "Cadastrar"),
-              showProgress: status,
-              color: AlmaColors.darkBlueAlma,
+            const SizedBox(height: 18),
+            CustomTextFormField(
+              label: "CPF",
+              hint: "XXX.XXX.XXX-XX",
+              textEditingController: cpfController,
+              validator: _checkCpf,
+              keyboardType: TextInputType.number,
+              maxLength: 14,
+              inputFormatters: [
+                MaskTextInputFormatter(mask: '###.###.###-##'),
+              ],
             ),
-          ),
-          const SizedBox(height: 18),
-        ],
+            const SizedBox(height: 18),
+            CustomTextFormField(
+              label: "Telefone",
+              hint: "(XX) 00000-0000",
+              textEditingController: phoneController,
+              validator: (value) => _checkValueIsNotEmpty(value, "Digite seu telefone"),
+              keyboardType: TextInputType.phone,
+              inputFormatters: [phoneInputFormatter],
+            ),
+            const SizedBox(height: 18),
+            CustomTextFormField(
+              label: "Email",
+              hint: "joao@email.com.br",
+              textEditingController: emailController,
+              validator: (value) => _checkValueIsNotEmpty(value, "Digite seu email"),
+              keyboardType: TextInputType.emailAddress,
+            ),
+            const SizedBox(height: 18),
+            CustomTextFormField(
+              label: "Senha",
+              hint: "********",
+              textEditingController: passwordController,
+              validator: (value) => _checkValueIsNotEmpty(value, "Digite sua senha"),
+              keyboardType: TextInputType.text,
+              suffixIcon: const Icon(
+                Icons.lock,
+                color: AlmaColors.blueAlma,
+                size: 24,
+              ),
+              obscureText: true,
+            ),
+            const SizedBox(height: 18),
+            CustomTextFormField(
+              label: "Confirme sua senha",
+              hint: "********",
+              textEditingController: checkPasswordController,
+              validator: (value) => _checkValueIsNotEmpty(value, "Digite sua senha"),
+              keyboardType: TextInputType.text,
+              suffixIcon: const Icon(
+                Icons.lock,
+                color: AlmaColors.blueAlma,
+                size: 24,
+              ),
+              obscureText: true,
+            ),
+            const SizedBox(height: 18),
+            BlocListener<SignupBloc, SignupState>(
+              listener: (context, state) {
+                if (state is Success) {
+                  Navigator.of(context).pop();
+                  showSnackbar(context, "Cadastro realizado com sucesso");
+                }
+    
+                if (state is Error) {
+                  showSnackbar(context, state.message);
+                  buttonStatus(false);
+                }
+              },
+              child: CustomButton(
+                onPressed: _signup,
+                child: const CustomText(text: "Cadastrar"),
+                showProgress: status,
+                color: AlmaColors.darkBlueAlma,
+              ),
+            ),
+            const SizedBox(height: 18),
+          ],
+        ),
       ),
     );
   }
@@ -152,7 +162,7 @@ class _SignupFormState extends State<SignupForm> {
     return null;
   }
 
-  _sigup(BuildContext context) async {
+  void _signup() async {
     bool formOk = _formKey.currentState!.validate();
 
     if (!formOk) {
@@ -166,13 +176,12 @@ class _SignupFormState extends State<SignupForm> {
     }
 
     User user = _fillUserModel();
-    BlocProvider.of<ApplicationBloc>(context).add(Signup(user: user));
+    _signupBloc.add(SignUp(user: user));
     buttonStatus(true);
   }
 
   User _fillUserModel() {
     return User(
-      id: "",
       name: nameController!.text,
       socialName: socialnameController!.text,
       email: emailController!.text,

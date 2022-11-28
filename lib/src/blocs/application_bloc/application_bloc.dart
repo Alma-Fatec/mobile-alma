@@ -22,11 +22,7 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
   Future<void> _onEvent(ApplicationEvent event, Emitter<ApplicationState> emit) async {
     if (event is Initialise) {
       await _mapInitialiseToState(event, emit);
-    } else if (event is Login) {
-      await _mapLoginToState(event, emit);
-    } else if (event is Signup) {
-      await _mapSingupToState(event, emit);
-    }
+    } 
   }
 
   Future<void> _mapInitialiseToState(Initialise event, Emitter<ApplicationState> emit) async {
@@ -37,23 +33,5 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
     }
 
     emit(const Success());
-  }
-
-  Future<void> _mapLoginToState(Login event, Emitter<ApplicationState> emit) async {
-    try {
-      await userService.login(event.email, event.password);
-      emit(const Success());
-    } catch (e) {
-      emit(const Error('Falha na tentativa de login'));
-    }
-  }
-
-  Future<void> _mapSingupToState(Signup event, Emitter<ApplicationState> emit) async {
-    try {
-      await userService.signup(event.user);
-      emit(const Success());
-    } catch (e) {
-      emit(const Error('Falha ao realizar cadastro'));
-    }
   }
 }
