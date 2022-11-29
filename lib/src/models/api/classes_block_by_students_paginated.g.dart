@@ -11,7 +11,7 @@ ClassesBlockByStudentsPaginated _$ClassesBlockByStudentsPaginatedFromJson(
     ClassesBlockByStudentsPaginated(
       page: json['page'] as int?,
       limit: json['limit'] as int?,
-      userId: json['userId'] as String?,
+      userId: json['user_ids'] as String?,
     );
 
 Map<String, dynamic> _$ClassesBlockByStudentsPaginatedToJson(
@@ -19,5 +19,5 @@ Map<String, dynamic> _$ClassesBlockByStudentsPaginatedToJson(
     <String, dynamic>{
       'page': instance.page,
       'limit': instance.limit,
-      'userId': instance.userId,
+      'user_ids': instance.userId,
     };

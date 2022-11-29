@@ -3,6 +3,7 @@ import 'package:alma/src/api/alma_api.dart';
 import 'package:alma/src/api/alma_interceptor_token.dart';
 import 'package:alma/src/blocs/application_bloc/application_bloc.dart';
 import 'package:alma/src/repositories/class_block_repository.dart';
+import 'package:alma/src/repositories/class_room_repository.dart';
 import 'package:alma/src/repositories/user_repository.dart';
 import 'package:alma/src/services/classblock_service.dart';
 import 'package:alma/src/services/user_service.dart';
@@ -19,12 +20,16 @@ class AlmaApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final dio = Dio()..interceptors.add(AlmaInterceptorToken());
     final almaApi = AlmaApi(dio);
-    final classblockService = ClassblockService(classBlockRepository: ClassBlockRepository(api: almaApi));
+    final classblockService = ClassblockService(
+      classBlockRepository: ClassBlockRepository(api: almaApi),
+      classRoomRepository: ClassRoomRepository(api: almaApi),
+    );
     final userService = UserService(userRepository: UserRepository(almaApi: almaApi));
     final applicationBloc = ApplicationBloc(userService: userService);
 
     return MultiProvider(
       providers: [
+        Provider<UserService>.value(value: userService),
         Provider<ClassblockService>.value(value: classblockService),
       ],
       child: MultiBlocProvider(

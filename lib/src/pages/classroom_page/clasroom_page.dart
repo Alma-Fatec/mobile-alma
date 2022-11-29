@@ -43,9 +43,12 @@ class ClassroomPage extends StatelessWidget {
         padding: const EdgeInsets.only(left: 16, right: 16, top: 45, bottom: 8),
         height: MediaQuery.of(context).size.height * 0.85,
         child: Stack(
+          fit: StackFit.expand,
           children: [
             SingleChildScrollView(
-              child: ClassroomBody(classRoom: classRoom,),
+              child: ClassroomBody(
+                classRoom: classRoom,
+              ),
             ),
             Positioned(
               bottom: 0,
@@ -110,7 +113,7 @@ class ClassroomBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(
-          text: classRoom.title!,
+          text: classRoom.name!,
           fontFamily: "Montserrat",
           fontSize: 18,
           fontWeight: FontWeight.w900,
@@ -131,23 +134,19 @@ class ClassroomBody extends StatelessWidget {
             minWidth: 370,
             minHeight: 280,
           ),
-          decoration: BoxDecoration(
-              color: AlmaColors.blueAlma,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black54,
-                  blurRadius: 15.0,
-                  offset: Offset(0.0, 0.75),
-                )
-              ]),
+          decoration:
+              BoxDecoration(color: AlmaColors.blueAlma, borderRadius: BorderRadius.circular(10), boxShadow: const [
+            BoxShadow(
+              color: Colors.black54,
+              blurRadius: 15.0,
+              offset: Offset(0.0, 0.75),
+            )
+          ]),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: Image.network(
-              classRoom.file!,
-              width: 370,
-              fit: BoxFit.fill,
-            ),
+            child: classRoom.cover != null
+                ? Image.network(classRoom.cover!, width: 370, fit: BoxFit.fill)
+                : Image.asset('assets/images/placeholder-image.png', fit: BoxFit.fill, width: 370),
           ),
         ),
       ],

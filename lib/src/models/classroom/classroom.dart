@@ -6,18 +6,18 @@ part 'classroom.g.dart';
 @JsonSerializable()
 class ClassRoom {
   int? id;
-  String? title;
+  String? name;
   String? description;
-  int? sequence;
-  String? file;
+  int? order;
+  String? cover;
   List<Lesson>? lesson;
 
   ClassRoom({
     this.id,
-    this.title,
+    this.name,
     this.description,
-    this.sequence,
-    this.file,
+    this.order,
+    this.cover,
     this.lesson,
   });
 

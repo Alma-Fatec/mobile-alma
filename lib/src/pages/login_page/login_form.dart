@@ -1,3 +1,4 @@
+import 'package:alma/src/blocs/application_bloc/application_bloc.dart';
 import 'package:alma/src/blocs/login_bloc/login_bloc.dart';
 import 'package:alma/src/pages/home_page/home_page.dart';
 import 'package:alma/src/pages/signup.dart';
@@ -97,6 +98,7 @@ class _FormApplicationState extends State<FormLogin> {
               BlocListener<LoginBloc, LoginState>(
                 listener: (context, state) {
                   if (state is Success) {
+                    context.read<ApplicationBloc>().add(SaveCurrentUser(user: state.user));
                     pushReplace(context, const HomePage(), replace: true);
                   }
 

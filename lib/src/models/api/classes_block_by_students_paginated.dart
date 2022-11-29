@@ -13,5 +13,6 @@ class ClassesBlockByStudentsPaginated extends PaginatedRequest {
   @override
   Map<String, dynamic> toJson() => _$ClassesBlockByStudentsPaginatedToJson(this);
 
+  @JsonKey(name: 'user_ids')
   final String? userId;
 }

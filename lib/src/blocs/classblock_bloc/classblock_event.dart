@@ -2,6 +2,6 @@ part of 'classblock_bloc.dart';
 
 @freezed
 class ClassblockEvent with _$ClassblockEvent {
-  const factory ClassblockEvent.loadClassblock() = LoadClassblock;
-  const factory ClassblockEvent.loadClassroomByBlockId(int blockId) = LoadClassroomByBlockId;
+  const factory ClassblockEvent.loadClassblockByUserId({String? userId}) = LoadClassblockByUserId;
+  const factory ClassblockEvent.loadClassroomByBlockId(String blockId) = LoadClassroomByBlockId;
 }

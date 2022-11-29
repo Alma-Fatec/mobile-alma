@@ -14,13 +14,12 @@ class InitialiseApplication extends StatelessWidget {
     BlocProvider.of<ApplicationBloc>(context).add(const Initialise());
     return BlocListener<ApplicationBloc, ApplicationState>(
       listener: (context, state) {
-        if (state is Success) {
+        if (state.isInitialised ?? false) {
           pushReplace(context, const HomePage(), replace: true);
+          return;
         }
 
-        if (state is Error) {
-          pushReplace(context, const LoginPage(), replace: true);
-        }
+        pushReplace(context, const LoginPage(), replace: true);
       },
       child: const SplashScreen(),
     );

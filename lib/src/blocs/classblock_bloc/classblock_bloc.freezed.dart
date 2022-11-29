@@ -18,39 +18,40 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ClassblockEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadClassblock,
-    required TResult Function(int blockId) loadClassroomByBlockId,
+    required TResult Function(String? userId) loadClassblockByUserId,
+    required TResult Function(String blockId) loadClassroomByBlockId,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadClassblock,
-    TResult? Function(int blockId)? loadClassroomByBlockId,
+    TResult? Function(String? userId)? loadClassblockByUserId,
+    TResult? Function(String blockId)? loadClassroomByBlockId,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadClassblock,
-    TResult Function(int blockId)? loadClassroomByBlockId,
+    TResult Function(String? userId)? loadClassblockByUserId,
+    TResult Function(String blockId)? loadClassroomByBlockId,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(LoadClassblock value) loadClassblock,
+    required TResult Function(LoadClassblockByUserId value)
+        loadClassblockByUserId,
     required TResult Function(LoadClassroomByBlockId value)
         loadClassroomByBlockId,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadClassblock value)? loadClassblock,
+    TResult? Function(LoadClassblockByUserId value)? loadClassblockByUserId,
     TResult? Function(LoadClassroomByBlockId value)? loadClassroomByBlockId,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadClassblock value)? loadClassblock,
+    TResult Function(LoadClassblockByUserId value)? loadClassblockByUserId,
     TResult Function(LoadClassroomByBlockId value)? loadClassroomByBlockId,
     required TResult orElse(),
   }) =>
@@ -76,67 +77,94 @@ class _$ClassblockEventCopyWithImpl<$Res, $Val extends ClassblockEvent>
 }
 
 /// @nodoc
-abstract class _$$LoadClassblockCopyWith<$Res> {
-  factory _$$LoadClassblockCopyWith(
-          _$LoadClassblock value, $Res Function(_$LoadClassblock) then) =
-      __$$LoadClassblockCopyWithImpl<$Res>;
+abstract class _$$LoadClassblockByUserIdCopyWith<$Res> {
+  factory _$$LoadClassblockByUserIdCopyWith(_$LoadClassblockByUserId value,
+          $Res Function(_$LoadClassblockByUserId) then) =
+      __$$LoadClassblockByUserIdCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String? userId});
 }
 
 /// @nodoc
-class __$$LoadClassblockCopyWithImpl<$Res>
-    extends _$ClassblockEventCopyWithImpl<$Res, _$LoadClassblock>
-    implements _$$LoadClassblockCopyWith<$Res> {
-  __$$LoadClassblockCopyWithImpl(
-      _$LoadClassblock _value, $Res Function(_$LoadClassblock) _then)
+class __$$LoadClassblockByUserIdCopyWithImpl<$Res>
+    extends _$ClassblockEventCopyWithImpl<$Res, _$LoadClassblockByUserId>
+    implements _$$LoadClassblockByUserIdCopyWith<$Res> {
+  __$$LoadClassblockByUserIdCopyWithImpl(_$LoadClassblockByUserId _value,
+      $Res Function(_$LoadClassblockByUserId) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = freezed,
+  }) {
+    return _then(_$LoadClassblockByUserId(
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$LoadClassblock implements LoadClassblock {
-  const _$LoadClassblock();
+class _$LoadClassblockByUserId implements LoadClassblockByUserId {
+  const _$LoadClassblockByUserId({this.userId});
+
+  @override
+  final String? userId;
 
   @override
   String toString() {
-    return 'ClassblockEvent.loadClassblock()';
+    return 'ClassblockEvent.loadClassblockByUserId(userId: $userId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadClassblock);
+        (other.runtimeType == runtimeType &&
+            other is _$LoadClassblockByUserId &&
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, userId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadClassblockByUserIdCopyWith<_$LoadClassblockByUserId> get copyWith =>
+      __$$LoadClassblockByUserIdCopyWithImpl<_$LoadClassblockByUserId>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadClassblock,
-    required TResult Function(int blockId) loadClassroomByBlockId,
+    required TResult Function(String? userId) loadClassblockByUserId,
+    required TResult Function(String blockId) loadClassroomByBlockId,
   }) {
-    return loadClassblock();
+    return loadClassblockByUserId(userId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadClassblock,
-    TResult? Function(int blockId)? loadClassroomByBlockId,
+    TResult? Function(String? userId)? loadClassblockByUserId,
+    TResult? Function(String blockId)? loadClassroomByBlockId,
   }) {
-    return loadClassblock?.call();
+    return loadClassblockByUserId?.call(userId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadClassblock,
-    TResult Function(int blockId)? loadClassroomByBlockId,
+    TResult Function(String? userId)? loadClassblockByUserId,
+    TResult Function(String blockId)? loadClassroomByBlockId,
     required TResult orElse(),
   }) {
-    if (loadClassblock != null) {
-      return loadClassblock();
+    if (loadClassblockByUserId != null) {
+      return loadClassblockByUserId(userId);
     }
     return orElse();
   }
@@ -144,38 +172,45 @@ class _$LoadClassblock implements LoadClassblock {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(LoadClassblock value) loadClassblock,
+    required TResult Function(LoadClassblockByUserId value)
+        loadClassblockByUserId,
     required TResult Function(LoadClassroomByBlockId value)
         loadClassroomByBlockId,
   }) {
-    return loadClassblock(this);
+    return loadClassblockByUserId(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadClassblock value)? loadClassblock,
+    TResult? Function(LoadClassblockByUserId value)? loadClassblockByUserId,
     TResult? Function(LoadClassroomByBlockId value)? loadClassroomByBlockId,
   }) {
-    return loadClassblock?.call(this);
+    return loadClassblockByUserId?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadClassblock value)? loadClassblock,
+    TResult Function(LoadClassblockByUserId value)? loadClassblockByUserId,
     TResult Function(LoadClassroomByBlockId value)? loadClassroomByBlockId,
     required TResult orElse(),
   }) {
-    if (loadClassblock != null) {
-      return loadClassblock(this);
+    if (loadClassblockByUserId != null) {
+      return loadClassblockByUserId(this);
     }
     return orElse();
   }
 }
 
-abstract class LoadClassblock implements ClassblockEvent {
-  const factory LoadClassblock() = _$LoadClassblock;
+abstract class LoadClassblockByUserId implements ClassblockEvent {
+  const factory LoadClassblockByUserId({final String? userId}) =
+      _$LoadClassblockByUserId;
+
+  String? get userId;
+  @JsonKey(ignore: true)
+  _$$LoadClassblockByUserIdCopyWith<_$LoadClassblockByUserId> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -184,7 +219,7 @@ abstract class _$$LoadClassroomByBlockIdCopyWith<$Res> {
           $Res Function(_$LoadClassroomByBlockId) then) =
       __$$LoadClassroomByBlockIdCopyWithImpl<$Res>;
   @useResult
-  $Res call({int blockId});
+  $Res call({String blockId});
 }
 
 /// @nodoc
@@ -204,7 +239,7 @@ class __$$LoadClassroomByBlockIdCopyWithImpl<$Res>
       null == blockId
           ? _value.blockId
           : blockId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
     ));
   }
 }
@@ -215,7 +250,7 @@ class _$LoadClassroomByBlockId implements LoadClassroomByBlockId {
   const _$LoadClassroomByBlockId(this.blockId);
 
   @override
-  final int blockId;
+  final String blockId;
 
   @override
   String toString() {
@@ -243,8 +278,8 @@ class _$LoadClassroomByBlockId implements LoadClassroomByBlockId {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadClassblock,
-    required TResult Function(int blockId) loadClassroomByBlockId,
+    required TResult Function(String? userId) loadClassblockByUserId,
+    required TResult Function(String blockId) loadClassroomByBlockId,
   }) {
     return loadClassroomByBlockId(blockId);
   }
@@ -252,8 +287,8 @@ class _$LoadClassroomByBlockId implements LoadClassroomByBlockId {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadClassblock,
-    TResult? Function(int blockId)? loadClassroomByBlockId,
+    TResult? Function(String? userId)? loadClassblockByUserId,
+    TResult? Function(String blockId)? loadClassroomByBlockId,
   }) {
     return loadClassroomByBlockId?.call(blockId);
   }
@@ -261,8 +296,8 @@ class _$LoadClassroomByBlockId implements LoadClassroomByBlockId {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadClassblock,
-    TResult Function(int blockId)? loadClassroomByBlockId,
+    TResult Function(String? userId)? loadClassblockByUserId,
+    TResult Function(String blockId)? loadClassroomByBlockId,
     required TResult orElse(),
   }) {
     if (loadClassroomByBlockId != null) {
@@ -274,7 +309,8 @@ class _$LoadClassroomByBlockId implements LoadClassroomByBlockId {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(LoadClassblock value) loadClassblock,
+    required TResult Function(LoadClassblockByUserId value)
+        loadClassblockByUserId,
     required TResult Function(LoadClassroomByBlockId value)
         loadClassroomByBlockId,
   }) {
@@ -284,7 +320,7 @@ class _$LoadClassroomByBlockId implements LoadClassroomByBlockId {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadClassblock value)? loadClassblock,
+    TResult? Function(LoadClassblockByUserId value)? loadClassblockByUserId,
     TResult? Function(LoadClassroomByBlockId value)? loadClassroomByBlockId,
   }) {
     return loadClassroomByBlockId?.call(this);
@@ -293,7 +329,7 @@ class _$LoadClassroomByBlockId implements LoadClassroomByBlockId {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadClassblock value)? loadClassblock,
+    TResult Function(LoadClassblockByUserId value)? loadClassblockByUserId,
     TResult Function(LoadClassroomByBlockId value)? loadClassroomByBlockId,
     required TResult orElse(),
   }) {
@@ -305,10 +341,10 @@ class _$LoadClassroomByBlockId implements LoadClassroomByBlockId {
 }
 
 abstract class LoadClassroomByBlockId implements ClassblockEvent {
-  const factory LoadClassroomByBlockId(final int blockId) =
+  const factory LoadClassroomByBlockId(final String blockId) =
       _$LoadClassroomByBlockId;
 
-  int get blockId;
+  String get blockId;
   @JsonKey(ignore: true)
   _$$LoadClassroomByBlockIdCopyWith<_$LoadClassroomByBlockId> get copyWith =>
       throw _privateConstructorUsedError;

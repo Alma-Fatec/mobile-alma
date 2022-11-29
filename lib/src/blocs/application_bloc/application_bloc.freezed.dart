@@ -19,44 +19,38 @@ mixin _$ApplicationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialise,
-    required TResult Function(String email, String password) login,
-    required TResult Function(User user) signup,
+    required TResult Function(User? user) saveCurrentUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialise,
-    TResult? Function(String email, String password)? login,
-    TResult? Function(User user)? signup,
+    TResult? Function(User? user)? saveCurrentUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialise,
-    TResult Function(String email, String password)? login,
-    TResult Function(User user)? signup,
+    TResult Function(User? user)? saveCurrentUser,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initialise value) initialise,
-    required TResult Function(Login value) login,
-    required TResult Function(Signup value) signup,
+    required TResult Function(SaveCurrentUser value) saveCurrentUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initialise value)? initialise,
-    TResult? Function(Login value)? login,
-    TResult? Function(Signup value)? signup,
+    TResult? Function(SaveCurrentUser value)? saveCurrentUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initialise value)? initialise,
-    TResult Function(Login value)? login,
-    TResult Function(Signup value)? signup,
+    TResult Function(SaveCurrentUser value)? saveCurrentUser,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,8 +113,7 @@ class _$Initialise implements Initialise {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialise,
-    required TResult Function(String email, String password) login,
-    required TResult Function(User user) signup,
+    required TResult Function(User? user) saveCurrentUser,
   }) {
     return initialise();
   }
@@ -129,8 +122,7 @@ class _$Initialise implements Initialise {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialise,
-    TResult? Function(String email, String password)? login,
-    TResult? Function(User user)? signup,
+    TResult? Function(User? user)? saveCurrentUser,
   }) {
     return initialise?.call();
   }
@@ -139,8 +131,7 @@ class _$Initialise implements Initialise {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialise,
-    TResult Function(String email, String password)? login,
-    TResult Function(User user)? signup,
+    TResult Function(User? user)? saveCurrentUser,
     required TResult orElse(),
   }) {
     if (initialise != null) {
@@ -153,8 +144,7 @@ class _$Initialise implements Initialise {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initialise value) initialise,
-    required TResult Function(Login value) login,
-    required TResult Function(Signup value) signup,
+    required TResult Function(SaveCurrentUser value) saveCurrentUser,
   }) {
     return initialise(this);
   }
@@ -163,8 +153,7 @@ class _$Initialise implements Initialise {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initialise value)? initialise,
-    TResult? Function(Login value)? login,
-    TResult? Function(Signup value)? signup,
+    TResult? Function(SaveCurrentUser value)? saveCurrentUser,
   }) {
     return initialise?.call(this);
   }
@@ -173,8 +162,7 @@ class _$Initialise implements Initialise {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initialise value)? initialise,
-    TResult Function(Login value)? login,
-    TResult Function(Signup value)? signup,
+    TResult Function(SaveCurrentUser value)? saveCurrentUser,
     required TResult orElse(),
   }) {
     if (initialise != null) {
@@ -189,198 +177,54 @@ abstract class Initialise implements ApplicationEvent {
 }
 
 /// @nodoc
-abstract class _$$LoginCopyWith<$Res> {
-  factory _$$LoginCopyWith(_$Login value, $Res Function(_$Login) then) =
-      __$$LoginCopyWithImpl<$Res>;
+abstract class _$$SaveCurrentUserCopyWith<$Res> {
+  factory _$$SaveCurrentUserCopyWith(
+          _$SaveCurrentUser value, $Res Function(_$SaveCurrentUser) then) =
+      __$$SaveCurrentUserCopyWithImpl<$Res>;
   @useResult
-  $Res call({String email, String password});
+  $Res call({User? user});
 }
 
 /// @nodoc
-class __$$LoginCopyWithImpl<$Res>
-    extends _$ApplicationEventCopyWithImpl<$Res, _$Login>
-    implements _$$LoginCopyWith<$Res> {
-  __$$LoginCopyWithImpl(_$Login _value, $Res Function(_$Login) _then)
+class __$$SaveCurrentUserCopyWithImpl<$Res>
+    extends _$ApplicationEventCopyWithImpl<$Res, _$SaveCurrentUser>
+    implements _$$SaveCurrentUserCopyWith<$Res> {
+  __$$SaveCurrentUserCopyWithImpl(
+      _$SaveCurrentUser _value, $Res Function(_$SaveCurrentUser) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = null,
-    Object? password = null,
+    Object? user = freezed,
   }) {
-    return _then(_$Login(
-      null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$Login implements Login {
-  const _$Login(this.email, this.password);
-
-  @override
-  final String email;
-  @override
-  final String password;
-
-  @override
-  String toString() {
-    return 'ApplicationEvent.login(email: $email, password: $password)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$Login &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.password, password) ||
-                other.password == password));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, email, password);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoginCopyWith<_$Login> get copyWith =>
-      __$$LoginCopyWithImpl<_$Login>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialise,
-    required TResult Function(String email, String password) login,
-    required TResult Function(User user) signup,
-  }) {
-    return login(email, password);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialise,
-    TResult? Function(String email, String password)? login,
-    TResult? Function(User user)? signup,
-  }) {
-    return login?.call(email, password);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialise,
-    TResult Function(String email, String password)? login,
-    TResult Function(User user)? signup,
-    required TResult orElse(),
-  }) {
-    if (login != null) {
-      return login(email, password);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initialise value) initialise,
-    required TResult Function(Login value) login,
-    required TResult Function(Signup value) signup,
-  }) {
-    return login(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initialise value)? initialise,
-    TResult? Function(Login value)? login,
-    TResult? Function(Signup value)? signup,
-  }) {
-    return login?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initialise value)? initialise,
-    TResult Function(Login value)? login,
-    TResult Function(Signup value)? signup,
-    required TResult orElse(),
-  }) {
-    if (login != null) {
-      return login(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Login implements ApplicationEvent {
-  const factory Login(final String email, final String password) = _$Login;
-
-  String get email;
-  String get password;
-  @JsonKey(ignore: true)
-  _$$LoginCopyWith<_$Login> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$SignupCopyWith<$Res> {
-  factory _$$SignupCopyWith(_$Signup value, $Res Function(_$Signup) then) =
-      __$$SignupCopyWithImpl<$Res>;
-  @useResult
-  $Res call({User user});
-}
-
-/// @nodoc
-class __$$SignupCopyWithImpl<$Res>
-    extends _$ApplicationEventCopyWithImpl<$Res, _$Signup>
-    implements _$$SignupCopyWith<$Res> {
-  __$$SignupCopyWithImpl(_$Signup _value, $Res Function(_$Signup) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = null,
-  }) {
-    return _then(_$Signup(
-      user: null == user
+    return _then(_$SaveCurrentUser(
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User,
+              as User?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$Signup implements Signup {
-  const _$Signup({required this.user});
+class _$SaveCurrentUser implements SaveCurrentUser {
+  const _$SaveCurrentUser({this.user});
 
   @override
-  final User user;
+  final User? user;
 
   @override
   String toString() {
-    return 'ApplicationEvent.signup(user: $user)';
+    return 'ApplicationEvent.saveCurrentUser(user: $user)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Signup &&
+            other is _$SaveCurrentUser &&
             (identical(other.user, user) || other.user == user));
   }
 
@@ -390,39 +234,36 @@ class _$Signup implements Signup {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SignupCopyWith<_$Signup> get copyWith =>
-      __$$SignupCopyWithImpl<_$Signup>(this, _$identity);
+  _$$SaveCurrentUserCopyWith<_$SaveCurrentUser> get copyWith =>
+      __$$SaveCurrentUserCopyWithImpl<_$SaveCurrentUser>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialise,
-    required TResult Function(String email, String password) login,
-    required TResult Function(User user) signup,
+    required TResult Function(User? user) saveCurrentUser,
   }) {
-    return signup(user);
+    return saveCurrentUser(user);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialise,
-    TResult? Function(String email, String password)? login,
-    TResult? Function(User user)? signup,
+    TResult? Function(User? user)? saveCurrentUser,
   }) {
-    return signup?.call(user);
+    return saveCurrentUser?.call(user);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialise,
-    TResult Function(String email, String password)? login,
-    TResult Function(User user)? signup,
+    TResult Function(User? user)? saveCurrentUser,
     required TResult orElse(),
   }) {
-    if (signup != null) {
-      return signup(user);
+    if (saveCurrentUser != null) {
+      return saveCurrentUser(user);
     }
     return orElse();
   }
@@ -431,91 +272,51 @@ class _$Signup implements Signup {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initialise value) initialise,
-    required TResult Function(Login value) login,
-    required TResult Function(Signup value) signup,
+    required TResult Function(SaveCurrentUser value) saveCurrentUser,
   }) {
-    return signup(this);
+    return saveCurrentUser(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initialise value)? initialise,
-    TResult? Function(Login value)? login,
-    TResult? Function(Signup value)? signup,
+    TResult? Function(SaveCurrentUser value)? saveCurrentUser,
   }) {
-    return signup?.call(this);
+    return saveCurrentUser?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initialise value)? initialise,
-    TResult Function(Login value)? login,
-    TResult Function(Signup value)? signup,
+    TResult Function(SaveCurrentUser value)? saveCurrentUser,
     required TResult orElse(),
   }) {
-    if (signup != null) {
-      return signup(this);
+    if (saveCurrentUser != null) {
+      return saveCurrentUser(this);
     }
     return orElse();
   }
 }
 
-abstract class Signup implements ApplicationEvent {
-  const factory Signup({required final User user}) = _$Signup;
+abstract class SaveCurrentUser implements ApplicationEvent {
+  const factory SaveCurrentUser({final User? user}) = _$SaveCurrentUser;
 
-  User get user;
+  User? get user;
   @JsonKey(ignore: true)
-  _$$SignupCopyWith<_$Signup> get copyWith =>
+  _$$SaveCurrentUserCopyWith<_$SaveCurrentUser> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 mixin _$ApplicationState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() success,
-    required TResult Function(String message) error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? success,
-    TResult? Function(String message)? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? success,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Success value) success,
-    required TResult Function(Error value) error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Success value)? success,
-    TResult? Function(Error value)? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Success value)? success,
-    TResult Function(Error value)? error,
-    required TResult orElse(),
-  }) =>
+  User? get currentUser => throw _privateConstructorUsedError;
+  UserStatsMetadata? get userMetadata => throw _privateConstructorUsedError;
+  bool? get isInitialised => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ApplicationStateCopyWith<ApplicationState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -524,6 +325,11 @@ abstract class $ApplicationStateCopyWith<$Res> {
   factory $ApplicationStateCopyWith(
           ApplicationState value, $Res Function(ApplicationState) then) =
       _$ApplicationStateCopyWithImpl<$Res, ApplicationState>;
+  @useResult
+  $Res call(
+      {User? currentUser,
+      UserStatsMetadata? userMetadata,
+      bool? isInitialised});
 }
 
 /// @nodoc
@@ -535,352 +341,140 @@ class _$ApplicationStateCopyWithImpl<$Res, $Val extends ApplicationState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? currentUser = freezed,
+    Object? userMetadata = freezed,
+    Object? isInitialised = freezed,
+  }) {
+    return _then(_value.copyWith(
+      currentUser: freezed == currentUser
+          ? _value.currentUser
+          : currentUser // ignore: cast_nullable_to_non_nullable
+              as User?,
+      userMetadata: freezed == userMetadata
+          ? _value.userMetadata
+          : userMetadata // ignore: cast_nullable_to_non_nullable
+              as UserStatsMetadata?,
+      isInitialised: freezed == isInitialised
+          ? _value.isInitialised
+          : isInitialised // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$InitialCopyWith<$Res> {
-  factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
-      __$$InitialCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$InitialCopyWithImpl<$Res>
-    extends _$ApplicationStateCopyWithImpl<$Res, _$Initial>
-    implements _$$InitialCopyWith<$Res> {
-  __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$Initial implements Initial {
-  const _$Initial();
-
+abstract class _$$_ApplicationStateCopyWith<$Res>
+    implements $ApplicationStateCopyWith<$Res> {
+  factory _$$_ApplicationStateCopyWith(
+          _$_ApplicationState value, $Res Function(_$_ApplicationState) then) =
+      __$$_ApplicationStateCopyWithImpl<$Res>;
   @override
-  String toString() {
-    return 'ApplicationState.initial()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Initial);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() success,
-    required TResult Function(String message) error,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? success,
-    TResult? Function(String message)? error,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? success,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Success value) success,
-    required TResult Function(Error value) error,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Success value)? success,
-    TResult? Function(Error value)? error,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Success value)? success,
-    TResult Function(Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Initial implements ApplicationState {
-  const factory Initial() = _$Initial;
-}
-
-/// @nodoc
-abstract class _$$SuccessCopyWith<$Res> {
-  factory _$$SuccessCopyWith(_$Success value, $Res Function(_$Success) then) =
-      __$$SuccessCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$SuccessCopyWithImpl<$Res>
-    extends _$ApplicationStateCopyWithImpl<$Res, _$Success>
-    implements _$$SuccessCopyWith<$Res> {
-  __$$SuccessCopyWithImpl(_$Success _value, $Res Function(_$Success) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$Success implements Success {
-  const _$Success();
-
-  @override
-  String toString() {
-    return 'ApplicationState.success()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Success);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() success,
-    required TResult Function(String message) error,
-  }) {
-    return success();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? success,
-    TResult? Function(String message)? error,
-  }) {
-    return success?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? success,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Success value) success,
-    required TResult Function(Error value) error,
-  }) {
-    return success(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Success value)? success,
-    TResult? Function(Error value)? error,
-  }) {
-    return success?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Success value)? success,
-    TResult Function(Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Success implements ApplicationState {
-  const factory Success() = _$Success;
-}
-
-/// @nodoc
-abstract class _$$ErrorCopyWith<$Res> {
-  factory _$$ErrorCopyWith(_$Error value, $Res Function(_$Error) then) =
-      __$$ErrorCopyWithImpl<$Res>;
   @useResult
-  $Res call({String message});
+  $Res call(
+      {User? currentUser,
+      UserStatsMetadata? userMetadata,
+      bool? isInitialised});
 }
 
 /// @nodoc
-class __$$ErrorCopyWithImpl<$Res>
-    extends _$ApplicationStateCopyWithImpl<$Res, _$Error>
-    implements _$$ErrorCopyWith<$Res> {
-  __$$ErrorCopyWithImpl(_$Error _value, $Res Function(_$Error) _then)
+class __$$_ApplicationStateCopyWithImpl<$Res>
+    extends _$ApplicationStateCopyWithImpl<$Res, _$_ApplicationState>
+    implements _$$_ApplicationStateCopyWith<$Res> {
+  __$$_ApplicationStateCopyWithImpl(
+      _$_ApplicationState _value, $Res Function(_$_ApplicationState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = null,
+    Object? currentUser = freezed,
+    Object? userMetadata = freezed,
+    Object? isInitialised = freezed,
   }) {
-    return _then(_$Error(
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_$_ApplicationState(
+      currentUser: freezed == currentUser
+          ? _value.currentUser
+          : currentUser // ignore: cast_nullable_to_non_nullable
+              as User?,
+      userMetadata: freezed == userMetadata
+          ? _value.userMetadata
+          : userMetadata // ignore: cast_nullable_to_non_nullable
+              as UserStatsMetadata?,
+      isInitialised: freezed == isInitialised
+          ? _value.isInitialised
+          : isInitialised // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$Error implements Error {
-  const _$Error(this.message);
+class _$_ApplicationState extends _ApplicationState {
+  _$_ApplicationState(
+      {this.currentUser = null,
+      this.userMetadata = null,
+      this.isInitialised = false})
+      : super._();
 
   @override
-  final String message;
+  @JsonKey()
+  final User? currentUser;
+  @override
+  @JsonKey()
+  final UserStatsMetadata? userMetadata;
+  @override
+  @JsonKey()
+  final bool? isInitialised;
 
   @override
   String toString() {
-    return 'ApplicationState.error(message: $message)';
+    return 'ApplicationState(currentUser: $currentUser, userMetadata: $userMetadata, isInitialised: $isInitialised)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Error &&
-            (identical(other.message, message) || other.message == message));
+            other is _$_ApplicationState &&
+            (identical(other.currentUser, currentUser) ||
+                other.currentUser == currentUser) &&
+            (identical(other.userMetadata, userMetadata) ||
+                other.userMetadata == userMetadata) &&
+            (identical(other.isInitialised, isInitialised) ||
+                other.isInitialised == isInitialised));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode =>
+      Object.hash(runtimeType, currentUser, userMetadata, isInitialised);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ErrorCopyWith<_$Error> get copyWith =>
-      __$$ErrorCopyWithImpl<_$Error>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() success,
-    required TResult Function(String message) error,
-  }) {
-    return error(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? success,
-    TResult? Function(String message)? error,
-  }) {
-    return error?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? success,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Success value) success,
-    required TResult Function(Error value) error,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Success value)? success,
-    TResult? Function(Error value)? error,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Success value)? success,
-    TResult Function(Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
+  _$$_ApplicationStateCopyWith<_$_ApplicationState> get copyWith =>
+      __$$_ApplicationStateCopyWithImpl<_$_ApplicationState>(this, _$identity);
 }
 
-abstract class Error implements ApplicationState {
-  const factory Error(final String message) = _$Error;
+abstract class _ApplicationState extends ApplicationState {
+  factory _ApplicationState(
+      {final User? currentUser,
+      final UserStatsMetadata? userMetadata,
+      final bool? isInitialised}) = _$_ApplicationState;
+  _ApplicationState._() : super._();
 
-  String get message;
+  @override
+  User? get currentUser;
+  @override
+  UserStatsMetadata? get userMetadata;
+  @override
+  bool? get isInitialised;
+  @override
   @JsonKey(ignore: true)
-  _$$ErrorCopyWith<_$Error> get copyWith => throw _privateConstructorUsedError;
+  _$$_ApplicationStateCopyWith<_$_ApplicationState> get copyWith =>
+      throw _privateConstructorUsedError;
 }

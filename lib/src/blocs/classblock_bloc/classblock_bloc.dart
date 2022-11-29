@@ -17,15 +17,22 @@ class ClassBlockBloc extends Bloc<ClassblockEvent, ClassblockState> {
   final ClassblockService classblockService;
 
   void _onEvent(ClassblockEvent event, Emitter<ClassblockState> emit) async {
-    if (event is LoadClassblock) {
-      await getClassBlockByStudent(emit);
+    if (event is LoadClassblockByUserId) {
+      await getClassBlockByStudent(event, emit);
+    } else if (event is LoadClassroomByBlockId) {
+      await _mapClassBlockByBlockId(event, emit);
     }
   }
 
-  Future<void> getClassBlockByStudent(Emitter<ClassblockState> emit) async {
+  Future<void> getClassBlockByStudent(LoadClassblockByUserId event, Emitter<ClassblockState> emit) async {
     try {
-      ClassBlock classBlock = (await classblockService.getAllClassBlock())[0];
-      emit(Loaded(classBlock));
+      List<ClassBlock> classBlock = await classblockService.getClassBlockByStudent(event.userId!);
+      if (classBlock.isEmpty) {
+        emit(const Error('Nenhum bloco de aula cadastrado'));
+        return;
+      }
+
+      emit(Loaded(classBlock[0]));
     } catch (e) {
       emit(const Error('Falha ao recuperar bloco de aula'));
     }
@@ -33,10 +40,10 @@ class ClassBlockBloc extends Bloc<ClassblockEvent, ClassblockState> {
 
   Future<void> _mapClassBlockByBlockId(LoadClassroomByBlockId event, Emitter<ClassblockState> emit) async {
     try {
-      ClassBlock classBlock = (await classblockService.getAllClassBlock())[0];
-      emit(Loaded(classBlock));
+      ClassRoom classRoom = (await classblockService.getClassRoomByBlockId(event.blockId))[0];
+      emit(ClassRoomLoaded(classRoom));
     } catch (e) {
-      emit(const Error('Falha ao recuperar bloco de aula'));
+      // TODO(siqleomei): Implement a throw error
     }
   }
 }

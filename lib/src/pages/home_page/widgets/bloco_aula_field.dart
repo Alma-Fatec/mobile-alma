@@ -1,6 +1,9 @@
+import 'package:alma/src/blocs/application_bloc/application_bloc.dart';
 import 'package:alma/src/blocs/classblock_bloc/classblock_bloc.dart';
+import 'package:alma/src/pages/classroom_page/clasroom_page.dart';
 import 'package:alma/src/services/classblock_service.dart';
 import 'package:alma/src/utils/colors.dart';
+import 'package:alma/src/utils/nav.dart';
 import 'package:alma/src/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,11 +18,14 @@ class BlocoAulaField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _bloc = ClassBlockBloc(classblockService: Provider.of<ClassblockService>(context, listen: false));
+
     return BlocConsumer<ClassBlockBloc, ClassblockState>(
-        bloc: _bloc..add(const LoadClassblock()),
-        listener: (context, state) => {
-              // TODO(siqleomei): Send to class room screen
-            },
+        bloc: _bloc..add(LoadClassblockByUserId(userId: context.read<ApplicationBloc>().state.currentUser?.id)),
+        listener: (context, state) {
+          if (state is ClassRoomLoaded) {
+            push(context, ClassroomPage(classRoom: state.classRoom));
+          }
+        },
         builder: (context, state) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,7 +38,11 @@ class BlocoAulaField extends StatelessWidget {
                 color: AlmaColors.secondaryTextColorAlma,
               ),
               InkWell(
-                onTap: () => {},
+                onTap: () {
+                  if (state is Loaded && state.classBlock.id != null) {
+                    _bloc.add(LoadClassroomByBlockId(state.classBlock.id!));
+                  }
+                },
                 child: Container(
                   margin: const EdgeInsets.only(top: 5),
                   constraints: const BoxConstraints(
@@ -50,7 +60,11 @@ class BlocoAulaField extends StatelessWidget {
                       )
                     ],
                   ),
-                  child: state is Loaded ? _showClassblock(state) : const CircularProgressIndicator(),
+                  child: state is Loaded
+                      ? _showClassblock(state)
+                      : state is Error
+                          ? _showClassblock()
+                          : const SizedBox(width: 24, height: 24, child: CircularProgressIndicator()),
                 ),
               ),
               _progressTitle(),
@@ -60,8 +74,8 @@ class BlocoAulaField extends StatelessWidget {
         });
   }
 
-  Column _showClassblock(Loaded loaded) {
-    final classBlock = loaded.classBlock;
+  Column _showClassblock([Loaded? loaded]) {
+    final classBlock = loaded?.classBlock;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -70,14 +84,14 @@ class BlocoAulaField extends StatelessWidget {
             topLeft: Radius.circular(8),
             topRight: Radius.circular(8),
           ),
-          child: classBlock.cover != null
-              ? Image.network(classBlock.cover!, width: 370, fit: BoxFit.fill)
+          child: classBlock?.cover != null
+              ? Image.network(classBlock!.cover!, width: 370, fit: BoxFit.fill)
               : Image.asset('assets/images/placeholder-image.png', fit: BoxFit.fill, width: 370),
         ),
         Container(
           margin: const EdgeInsets.only(top: 8, left: 8, bottom: 8),
           child: CustomText(
-            text: classBlock.title!,
+            text: classBlock?.title ?? 'Não encontrado',
             fontFamily: "Montserrat",
             fontSize: 20,
             fontWeight: FontWeight.w900,
