@@ -12,8 +12,8 @@ ClassRoom _$ClassRoomFromJson(Map<String, dynamic> json) => ClassRoom(
       description: json['description'] as String?,
       order: json['order'] as int?,
       cover: json['cover'] as String?,
-      lesson: (json['lesson'] as List<dynamic>?)
-          ?.map((e) => Lesson.fromJson(e as Map<String, dynamic>))
+      assignment: (json['assignment'] as List<dynamic>?)
+          ?.map((e) => Assignment.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -23,5 +23,5 @@ Map<String, dynamic> _$ClassRoomToJson(ClassRoom instance) => <String, dynamic>{
       'description': instance.description,
       'order': instance.order,
       'cover': instance.cover,
-      'lesson': instance.lesson,
+      'assignment': instance.assignment,
     };

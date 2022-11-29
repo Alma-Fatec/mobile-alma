@@ -1,3 +1,4 @@
+import 'package:alma/src/models/box/class_block_box.dart';
 import 'package:alma/src/models/models.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -20,5 +21,19 @@ class ClassBlock {
 
   factory ClassBlock.fromJson(Map<String, dynamic> json) => _$ClassBlockFromJson(json);
 
+  factory ClassBlock.fromBox(ClassBlockBox box) => ClassBlock(
+        id: box.classBlockId,
+        title: box.title,
+        description: box.description,
+        cover: box.cover,
+      );
+
   Map<String, dynamic> toJson() => _$ClassBlockToJson(this);
+
+  ClassBlockBox toBox() => ClassBlockBox(
+        classBlockId: id,
+        title: title,
+        description: description,
+        cover: cover,
+      );
 }
