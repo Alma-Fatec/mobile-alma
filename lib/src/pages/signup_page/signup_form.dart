@@ -123,7 +123,7 @@ class _SignupFormState extends State<SignupForm> {
                   Navigator.of(context).pop();
                   showSnackbar(context, "Cadastro realizado com sucesso");
                 }
-    
+
                 if (state is Error) {
                   showSnackbar(context, state.message);
                   buttonStatus(false);
@@ -183,7 +183,7 @@ class _SignupFormState extends State<SignupForm> {
   User _fillUserModel() {
     return User(
       name: nameController!.text,
-      socialName: socialnameController!.text,
+      socialName: socialnameController!.text == '' ? null : socialnameController!.text,
       email: emailController!.text,
       password: passwordController!.text,
       phone: phoneInputFormatter.getUnmaskedText(),

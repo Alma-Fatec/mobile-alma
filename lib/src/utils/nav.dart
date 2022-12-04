@@ -1,20 +1,24 @@
+import 'package:alma/src/models/assignment/assignment.dart';
+import 'package:alma/src/models/classroom/classroom.dart';
+import 'package:alma/src/pages/pages.dart';
 import 'package:flutter/material.dart';
 
-push(BuildContext context, Widget widget) {
-  return Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) {
-      return widget;
-    }),
-  );
-}
+abstract class Navigation {
+  static Future<T?> toClasses<T extends Object>(BuildContext context, ClassRoom classRoom) async {
+    final Route<T> pageRoute = MaterialPageRoute(
+      settings: RouteSettings(name: ClassroomPage.route, arguments: classRoom),
+      builder: (_) => ClassroomPage(classRoom: classRoom),
+    );
 
-pushReplace(BuildContext context, Widget widget, {required bool replace}) {
-  return Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(builder: (context) {
-      return widget;
-    }),
-    result: replace,
-  );
+    return Navigator.push(context, pageRoute);
+  }
+
+  static Future<T?> toAssignment<T extends Object>(BuildContext context, Assignment assignment) async {
+    final Route<T> pageRoute = MaterialPageRoute(
+      settings: RouteSettings(name: AssignmentPage.route, arguments: assignment),
+      builder: (_) => AssignmentPage(assignment: assignment),
+    );
+
+    return Navigator.push(context, pageRoute);
+  }
 }

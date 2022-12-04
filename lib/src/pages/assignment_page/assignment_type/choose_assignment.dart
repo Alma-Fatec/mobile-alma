@@ -1,12 +1,10 @@
-import 'package:alma/src/pages/task.dart';
 import 'package:alma/src/utils/colors.dart';
-import 'package:alma/src/utils/nav.dart';
 import 'package:alma/src/utils/snackbar.dart';
 import 'package:alma/src/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
-class ChooseTask extends StatelessWidget {
-  const ChooseTask({Key? key}) : super(key: key);
+class ChooseAssignment extends StatelessWidget {
+  const ChooseAssignment({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +42,7 @@ class ChooseCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (isCorrect ?? false) {
-          push(context, TaskPage(type: 'write'));
+          // push(context, TaskPage(type: AssignmentType.DIGITACAO));
           return;
         }
 

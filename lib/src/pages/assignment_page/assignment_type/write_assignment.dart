@@ -1,11 +1,13 @@
+import 'package:alma/src/models/assignment/assignment.dart';
 import 'package:alma/src/widgets/custom_text.dart';
 import 'package:alma/src/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
-class WriteTask extends StatelessWidget {
-  const WriteTask({Key? key, required this.onAnswerUpdated}) : super(key: key);
+class WriteAssignment extends StatelessWidget {
+  const WriteAssignment({Key? key, required this.onAnswerUpdated, required this.assignment}) : super(key: key);
 
   final void Function(bool? isCorrect) onAnswerUpdated;
+  final Assignment assignment;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +58,7 @@ class WriteTask extends StatelessWidget {
                   child: CustomTextFormField(
                     label: '',
                     hint: 'Digite a palavra',
-                    onChanged: (value) => onAnswerUpdated(value?.toLowerCase() == 'bola'),
+                    onChanged: (value) => onAnswerUpdated(value?.toLowerCase() == assignment.answer?.toLowerCase()),
                   ),
                 ),
               ],

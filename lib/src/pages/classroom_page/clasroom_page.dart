@@ -1,18 +1,19 @@
+import 'package:alma/src/blocs/application_bloc/application_bloc.dart';
+import 'package:alma/src/blocs/navigation_bloc/navigation_bloc.dart';
 import 'package:alma/src/models/models.dart';
-import 'package:alma/src/pages/task.dart';
 import 'package:alma/src/utils/colors.dart';
-import 'package:alma/src/utils/nav.dart';
+import 'package:alma/src/widgets/block_navigation_listener.dart';
 import 'package:alma/src/widgets/custom_button.dart';
 import 'package:alma/src/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ClassroomPage extends StatelessWidget {
-  final ClassRoom classRoom;
+  const ClassroomPage({Key? key, required this.classRoom}) : super(key: key);
 
-  const ClassroomPage({
-    Key? key,
-    required this.classRoom,
-  }) : super(key: key);
+  static const route = '/classes';
+
+  final ClassRoom classRoom;
 
   @override
   Widget build(BuildContext context) {
@@ -54,26 +55,30 @@ class ClassroomPage extends StatelessWidget {
               bottom: 0,
               child: Column(
                 children: [
-                  CustomButton(
-                    onPressed: () => push(context, TaskPage(type: 'choose')),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Stack(
-                        children: const [
-                          Center(child: Text("AVANÇAR")),
-                          Positioned(
-                            top: 0,
-                            bottom: 0,
-                            right: 24,
-                            child: Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: Colors.white,
-                            ),
-                          )
-                        ],
+                  BlockNavigationListener(
+                    child: CustomButton(
+                      onPressed: () => context
+                          .read<NavigationBloc>()
+                          .add(LoadResults(blockId: context.read<ApplicationBloc>().state.currentBlock?.id ?? '')),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: Stack(
+                          children: const [
+                            Center(child: Text("AVANÇAR")),
+                            Positioned(
+                              top: 0,
+                              bottom: 0,
+                              right: 24,
+                              child: Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: Colors.white,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
+                      showProgress: false,
                     ),
-                    showProgress: false,
                   ),
                   const SizedBox(height: 18),
                   SizedBox(

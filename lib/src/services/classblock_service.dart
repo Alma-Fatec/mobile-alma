@@ -6,16 +6,25 @@ class ClassblockService {
   ClassblockService({
     required ClassBlockRepository classBlockRepository,
     required ClassRoomRepository classRoomRepository,
-  }) : _classBlockRepository = classBlockRepository, _classRoomRepository = classRoomRepository;
+  })  : _classBlockRepository = classBlockRepository,
+        _classRoomRepository = classRoomRepository;
 
   final ClassBlockRepository _classBlockRepository;
   final ClassRoomRepository _classRoomRepository;
 
-  Future<List<ClassBlock>> getClassBlockByStudent(String userId) async {
+  Future<List<ClassBlock>?> getClassBlockByStudent(String userId) async {
     return await _classBlockRepository.getClassBlockByStudent(userId);
   }
 
-  Future<List<ClassRoom>> getClassRoomByBlockId(String blockId) async {
+  Future<List<ClassRoom>?> getClassRoomByBlockId(String blockId) async {
     return await _classRoomRepository.getClassRoomByBlockId(blockId);
+  }
+
+  ClassBlock getCurrentClassBlock() {
+    return _classBlockRepository.getCurrentClassBlock();
+  }
+
+  List<ClassRoom> getClassesByBlock(String blockId) {
+    return _classRoomRepository.getClassesByBlock(blockId);
   }
 }

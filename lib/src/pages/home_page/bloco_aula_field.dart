@@ -1,9 +1,9 @@
 import 'package:alma/src/blocs/application_bloc/application_bloc.dart';
 import 'package:alma/src/blocs/classblock_bloc/classblock_bloc.dart';
-import 'package:alma/src/pages/classroom_page/clasroom_page.dart';
+import 'package:alma/src/blocs/navigation_bloc/navigation_bloc.dart' as nav;
 import 'package:alma/src/services/classblock_service.dart';
 import 'package:alma/src/utils/colors.dart';
-import 'package:alma/src/utils/nav.dart';
+import 'package:alma/src/widgets/block_navigation_listener.dart';
 import 'package:alma/src/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,13 +19,8 @@ class BlocoAulaField extends StatelessWidget {
   Widget build(BuildContext context) {
     _bloc = ClassBlockBloc(classblockService: Provider.of<ClassblockService>(context, listen: false));
 
-    return BlocConsumer<ClassBlockBloc, ClassblockState>(
+    return BlocBuilder<ClassBlockBloc, ClassblockState>(
         bloc: _bloc..add(LoadClassblockByUserId(userId: context.read<ApplicationBloc>().state.currentUser?.id)),
-        listener: (context, state) {
-          if (state is ClassRoomLoaded) {
-            push(context, ClassroomPage(classRoom: state.classRoom));
-          }
-        },
         builder: (context, state) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,34 +32,37 @@ class BlocoAulaField extends StatelessWidget {
                 fontWeight: FontWeight.w900,
                 color: AlmaColors.secondaryTextColorAlma,
               ),
-              InkWell(
-                onTap: () {
-                  if (state is Loaded && state.classBlock.id != null) {
-                    _bloc.add(LoadClassroomByBlockId(state.classBlock.id!));
-                  }
-                },
-                child: Container(
-                  margin: const EdgeInsets.only(top: 5),
-                  constraints: const BoxConstraints(
-                    minWidth: 370,
-                    minHeight: 280,
+              BlockNavigationListener(
+                child: InkWell(
+                  onTap: () {
+                    final classBlockId = context.read<ApplicationBloc>().state.currentBlock?.id ?? '';
+                    if (classBlockId != '') {
+                      context.read<nav.NavigationBloc>().add(nav.Initialise(blockId: classBlockId));
+                    }
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 5),
+                    constraints: const BoxConstraints(
+                      minWidth: 370,
+                      minHeight: 280,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AlmaColors.blueAlma,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black54,
+                          blurRadius: 15.0,
+                          offset: Offset(0.0, 0.75),
+                        )
+                      ],
+                    ),
+                    child: state is Loaded
+                        ? _showClassblock(state)
+                        : state is Error
+                            ? _showClassblock()
+                            : const SizedBox(width: 24, height: 24, child: CircularProgressIndicator()),
                   ),
-                  decoration: BoxDecoration(
-                    color: AlmaColors.blueAlma,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black54,
-                        blurRadius: 15.0,
-                        offset: Offset(0.0, 0.75),
-                      )
-                    ],
-                  ),
-                  child: state is Loaded
-                      ? _showClassblock(state)
-                      : state is Error
-                          ? _showClassblock()
-                          : const SizedBox(width: 24, height: 24, child: CircularProgressIndicator()),
                 ),
               ),
               _progressTitle(),

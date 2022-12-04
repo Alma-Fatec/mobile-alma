@@ -8,3 +8,4 @@ export 'api/paginated_request.dart';
 export 'api/paginated_result.dart';
 export 'api/classes_block_by_students_paginated.dart';
 export 'api/classes_by_block_id_paginated.dart';
+export 'api/assignment_block_by_class_id_paginated.dart';

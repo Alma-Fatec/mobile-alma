@@ -1,3 +1,4 @@
+import 'package:alma/src/models/box/box.dart';
 import 'package:objectbox/objectbox.dart';
 
 @Entity()
@@ -9,6 +10,7 @@ class ClassRoomBox {
     this.description,
     this.order,
     this.cover,
+    this.block,
   });
 
   int? id;
@@ -17,4 +19,5 @@ class ClassRoomBox {
   String? description;
   int? order;
   String? cover;
+  ClassBlockBox? block;
 }

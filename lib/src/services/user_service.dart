@@ -21,4 +21,12 @@ class UserService {
       rethrow;
     }
   }
+
+  User getCurrentUser() {
+    return _userRepository.getCurrentUser();
+  }
+
+  void logout() {
+    _userRepository.logout();
+  }
 }

@@ -17,8 +17,12 @@ abstract class AlmaApi {
 
   @GET("/classesBlock")
   Future<PaginatedResult<ClassBlock>> getClassesBlockByStudentPaginated(
-      @Query('') ClassesBlockByStudentsPaginated request);
+    @Query('') ClassesBlockByStudentsPaginated request,
+  );
 
   @GET("/classes")
   Future<PaginatedResult<ClassRoom>> getClassesByBlockIdPaginated(@Query('') ClassesByBlockIdPaginated request);
+
+  @GET("/assignments")
+  Future<PaginatedResult<Assignment>> getAssignmentsByClassIdPaginated(@Query('') AssignmentBlockByClassIdPaginated request);
 }

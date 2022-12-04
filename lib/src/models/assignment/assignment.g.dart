@@ -15,7 +15,10 @@ Assignment _$AssignmentFromJson(Map<String, dynamic> json) => Assignment(
       hiddenText: json['hiddenText'] as String?,
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
-      kind: $enumDecodeNullable(_$AssignmentTypeEnumMap, json['kind']),
+      kind: json['kind'] as String?,
+      classes: (json['class'] as List<dynamic>?)
+          ?.map((e) => ClassRoom.fromJson(e as Map<String, dynamic>))
+          .toList(),
       alternatives: (json['alternatives'] as List<dynamic>?)
           ?.map((e) => Alternative.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -31,14 +34,7 @@ Map<String, dynamic> _$AssignmentToJson(Assignment instance) =>
       'hiddenText': instance.hiddenText,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
-      'kind': _$AssignmentTypeEnumMap[instance.kind],
+      'kind': instance.kind,
+      'class': instance.classes,
       'alternatives': instance.alternatives,
     };
-
-const _$AssignmentTypeEnumMap = {
-  AssignmentType.alternativa: 'alternativa',
-  AssignmentType.alternativa_com_imagens: 'alternativa_com_imagens',
-  AssignmentType.audio: 'audio',
-  AssignmentType.alternativa_com_audio: 'alternativa_com_audio',
-  AssignmentType.digitacao: 'digitacao',
-};

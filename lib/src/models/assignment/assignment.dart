@@ -1,4 +1,3 @@
-import 'package:alma/src/models/assignment/assignment_type.dart';
 import 'package:alma/src/models/box/assignment_box.dart';
 import 'package:alma/src/models/models.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -17,6 +16,7 @@ class Assignment {
     this.createdAt,
     this.updatedAt,
     this.kind,
+    this.classes,
     this.alternatives,
   });
 
@@ -42,6 +42,7 @@ class Assignment {
         answer: answer,
         hiddenText: hiddenText,
         kind: kind,
+        classes: classes?.map((e) => e.toBox()).toList(),
       );
 
   int? id;
@@ -52,6 +53,9 @@ class Assignment {
   String? hiddenText;
   String? createdAt;
   String? updatedAt;
-  AssignmentType? kind;
+  String? kind;
+
+  @JsonKey(name: 'class')
+  List<ClassRoom>? classes;
   List<Alternative>? alternatives;
 }

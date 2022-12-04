@@ -1,3 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-enum AssignmentType { alternativa, alternativa_com_imagens, audio, alternativa_com_audio, digitacao }
+abstract class AssignmentType {
+  static const String DIGITACAO = 'DIGITAÇÃO';
+  static const String ALTERNARTIVA_COM_IMAGENS = 'ALTERNARTIVA_COM_IMAGENS';
+}

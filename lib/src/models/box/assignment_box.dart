@@ -1,4 +1,4 @@
-import 'package:alma/src/models/assignment/assignment_type.dart';
+import 'package:alma/src/models/box/box.dart';
 import 'package:objectbox/objectbox.dart';
 
 @Entity()
@@ -12,6 +12,7 @@ class AssignmentBox {
     this.answer,
     this.hiddenText,
     this.kind,
+    this.classes
   });
 
   int? id;
@@ -21,5 +22,7 @@ class AssignmentBox {
   String? file;
   String? answer;
   String? hiddenText;
-  AssignmentType? kind;
+  String? kind;
+  bool? done;
+  List<ClassRoomBox>? classes;
 }

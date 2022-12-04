@@ -18,30 +18,27 @@ class ClassBlockBloc extends Bloc<ClassblockEvent, ClassblockState> {
 
   void _onEvent(ClassblockEvent event, Emitter<ClassblockState> emit) async {
     if (event is LoadClassblockByUserId) {
-      await getClassBlockByStudent(event, emit);
+      _mapCurrentClassBlockToState(event, emit);
     } else if (event is LoadClassroomByBlockId) {
-      await _mapClassBlockByBlockId(event, emit);
+      _mapClassBlockByBlockId(event, emit);
     }
   }
 
-  Future<void> getClassBlockByStudent(LoadClassblockByUserId event, Emitter<ClassblockState> emit) async {
+  void _mapCurrentClassBlockToState(LoadClassblockByUserId event, Emitter<ClassblockState> emit) {
     try {
-      List<ClassBlock> classBlock = await classblockService.getClassBlockByStudent(event.userId!);
-      if (classBlock.isEmpty) {
-        emit(const Error('Nenhum bloco de aula cadastrado'));
-        return;
-      }
-
-      emit(Loaded(classBlock[0]));
+      final classBlock = classblockService.getCurrentClassBlock();
+      emit(Loaded(classBlock));
     } catch (e) {
       emit(const Error('Falha ao recuperar bloco de aula'));
     }
   }
 
-  Future<void> _mapClassBlockByBlockId(LoadClassroomByBlockId event, Emitter<ClassblockState> emit) async {
+  void _mapClassBlockByBlockId(LoadClassroomByBlockId event, Emitter<ClassblockState> emit) {
     try {
-      ClassRoom classRoom = (await classblockService.getClassRoomByBlockId(event.blockId))[0];
-      emit(ClassRoomLoaded(classRoom));
+      final classes = classblockService.getClassesByBlock(event.blockId);
+      if (classes.isNotEmpty) {
+        emit(ClassRoomLoaded(classes[0]));
+      }
     } catch (e) {
       // TODO(siqleomei): Implement a throw error
     }

@@ -1,6 +1,5 @@
-import 'package:alma/src/pages/home_page/home_page.dart';
+import 'package:alma/src/pages/home_page.dart';
 import 'package:alma/src/utils/colors.dart';
-import 'package:alma/src/utils/nav.dart';
 import 'package:alma/src/widgets/custom_button.dart';
 import 'package:alma/src/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +7,8 @@ import 'package:lottie/lottie.dart';
 
 class FinishedPage extends StatelessWidget {
   const FinishedPage({Key? key}) : super(key: key);
+
+  static const route = '/finished';
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +96,7 @@ class FinishedPage extends StatelessWidget {
 
   Widget _buildBottomHomeButton(BuildContext context) {
     return CustomButton(
-      onPressed: () => pushReplace(context, const HomePage(), replace: true),
+      onPressed: () => Navigator.pushNamedAndRemoveUntil(context, HomePage.route, (_) => false),
       color: AlmaColors.darkBlueAlma,
       child: SizedBox(
         width: MediaQuery.of(context).size.width,

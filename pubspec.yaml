@@ -13,17 +13,21 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
+  collection: 1.16.0
   json_annotation: ^4.6.0
   shared_preferences: ^2.0.15
   cpf_cnpj_validator: ^2.0.0
   freezed_annotation: ^2.1.0
   flutter_bloc: 8.1.1
   mask_text_input_formatter: ^2.4.0
+  path_provider: 2.0.11
   provider: 6.0.3
   retrofit: ^3.3.1
   dio: ^4.0.6
   lottie: ^1.4.3
   objectbox: ^1.6.2
+  objectbox_flutter_libs: 1.6.2
+  get: ^4.6.5
   
 dev_dependencies:
   flutter_test:

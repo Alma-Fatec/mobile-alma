@@ -1,10 +1,8 @@
 import 'package:alma/src/blocs/application_bloc/application_bloc.dart';
 import 'package:alma/src/blocs/login_bloc/login_bloc.dart';
-import 'package:alma/src/pages/home_page/home_page.dart';
-import 'package:alma/src/pages/signup.dart';
+import 'package:alma/src/pages/pages.dart';
 import 'package:alma/src/services/user_service.dart';
 import 'package:alma/src/utils/colors.dart';
-import 'package:alma/src/utils/nav.dart';
 import 'package:alma/src/utils/snackbar.dart';
 import 'package:alma/src/widgets/custom_button.dart';
 import 'package:alma/src/widgets/custom_text.dart';
@@ -98,8 +96,8 @@ class _FormApplicationState extends State<FormLogin> {
               BlocListener<LoginBloc, LoginState>(
                 listener: (context, state) {
                   if (state is Success) {
-                    context.read<ApplicationBloc>().add(SaveCurrentUser(user: state.user));
-                    pushReplace(context, const HomePage(), replace: true);
+                    context.read<ApplicationBloc>().add(Fetch(userId: state.user!.id!));
+                    Navigator.pushNamedAndRemoveUntil(context, HomePage.route, (_) => false);
                   }
 
                   if (state is Error) {
@@ -118,7 +116,7 @@ class _FormApplicationState extends State<FormLogin> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton(
-                    onPressed: () => push(context, const SignupPage()),
+                    onPressed: () => Navigator.pushNamed(context, SignupPage.route),
                     child: const CustomText(
                       text: 'Não tem uma conta?',
                       color: AlmaColors.whiteAlma,
@@ -127,9 +125,7 @@ class _FormApplicationState extends State<FormLogin> {
                   ),
                   Expanded(
                     child: TextButton(
-                      onPressed: () {
-                        pushReplace(context, const HomePage(), replace: true);
-                      },
+                      onPressed: () {},
                       child: const CustomText(
                         text: 'Esqueceu sua senha?',
                         color: AlmaColors.whiteAlma,

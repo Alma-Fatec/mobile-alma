@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 class SignupPage extends StatelessWidget {
   const SignupPage({Key? key}) : super(key: key);
 
+  static const route = '/signup';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
