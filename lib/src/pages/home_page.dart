@@ -45,15 +45,22 @@ class _HomePageState extends State<HomePage> {
       ),
       body: CustomBody(
         topMargin: 0,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 42),
-              Center(child: BlocoAulaField()),
-              const SizedBox(height: 39),
-              const AulasRecentesField(),
-            ],
+        child: RefreshIndicator(
+          onRefresh: () async {
+            final appBloc = BlocProvider.of<ApplicationBloc>(context);
+            final user = appBloc.state.currentUser;
+            appBloc.add(Fetch(userId: user!.id!));
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 42),
+                Center(child: BlocoAulaField()),
+                const SizedBox(height: 39),
+                const AulasRecentesField(),
+              ],
+            ),
           ),
         ),
       ),

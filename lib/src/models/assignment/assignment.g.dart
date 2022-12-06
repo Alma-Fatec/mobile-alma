@@ -19,8 +19,8 @@ Assignment _$AssignmentFromJson(Map<String, dynamic> json) => Assignment(
       classes: (json['class'] as List<dynamic>?)
           ?.map((e) => ClassRoom.fromJson(e as Map<String, dynamic>))
           .toList(),
-      alternatives: (json['alternatives'] as List<dynamic>?)
-          ?.map((e) => Alternative.fromJson(e as Map<String, dynamic>))
+      options: (json['options'] as List<dynamic>?)
+          ?.map((e) => Option.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -36,5 +36,5 @@ Map<String, dynamic> _$AssignmentToJson(Assignment instance) =>
       'updatedAt': instance.updatedAt,
       'kind': instance.kind,
       'class': instance.classes,
-      'alternatives': instance.alternatives,
+      'options': instance.options,
     };

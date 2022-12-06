@@ -37,7 +37,7 @@ class BodyAssignmentPage extends StatelessWidget {
                 onAnswerUpdated: onAnswerUpdated!,
                 assignment: assignment,
               )
-            : const ChooseAssignment(),
+            : ChooseAssignment(assignment: assignment,),
       ],
     );
   }

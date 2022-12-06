@@ -1,4 +1,5 @@
 import 'package:alma/initialise_application.dart';
+import 'package:alma/speaker_controller.dart';
 import 'package:alma/src/api/alma_api.dart';
 import 'package:alma/src/api/alma_interceptor_token.dart';
 import 'package:alma/src/blocs/application_bloc/application_bloc.dart';
@@ -57,6 +58,7 @@ class AlmaApp extends StatelessWidget {
       applicationService: applicationService,
       userService: userService,
     );
+    final AudioSpeakerController audioController = AudioSpeakerController(AudioControls());
     final assignmentBloc = AssignmentBloc(assignmentService: assignmentService);
     final navigationBloc = NavigationBloc(navigationService: navigationService);
 
@@ -64,6 +66,7 @@ class AlmaApp extends StatelessWidget {
       providers: [
         Provider<UserService>.value(value: userService),
         Provider<ClassblockService>.value(value: classblockService),
+        ChangeNotifierProvider<AudioSpeakerController>.value(value: audioController)
       ],
       child: MultiBlocProvider(
         providers: [

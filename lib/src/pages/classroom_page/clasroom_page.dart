@@ -2,7 +2,6 @@ import 'package:alma/src/blocs/application_bloc/application_bloc.dart';
 import 'package:alma/src/blocs/navigation_bloc/navigation_bloc.dart';
 import 'package:alma/src/models/models.dart';
 import 'package:alma/src/utils/colors.dart';
-import 'package:alma/src/widgets/block_navigation_listener.dart';
 import 'package:alma/src/widgets/custom_button.dart';
 import 'package:alma/src/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -55,30 +54,28 @@ class ClassroomPage extends StatelessWidget {
               bottom: 0,
               child: Column(
                 children: [
-                  BlockNavigationListener(
-                    child: CustomButton(
-                      onPressed: () => context
-                          .read<NavigationBloc>()
-                          .add(LoadResults(blockId: context.read<ApplicationBloc>().state.currentBlock?.id ?? '')),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: Stack(
-                          children: const [
-                            Center(child: Text("AVANÇAR")),
-                            Positioned(
-                              top: 0,
-                              bottom: 0,
-                              right: 24,
-                              child: Icon(
-                                Icons.arrow_forward_ios_rounded,
-                                color: Colors.white,
-                              ),
-                            )
-                          ],
-                        ),
+                  CustomButton(
+                    onPressed: () => context
+                        .read<NavigationBloc>()
+                        .add(LoadResults(blockId: context.read<ApplicationBloc>().state.currentBlock?.id ?? '')),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Stack(
+                        children: const [
+                          Center(child: Text("AVANÇAR")),
+                          Positioned(
+                            top: 0,
+                            bottom: 0,
+                            right: 24,
+                            child: Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
                       ),
-                      showProgress: false,
                     ),
+                    showProgress: false,
                   ),
                   const SizedBox(height: 18),
                   SizedBox(

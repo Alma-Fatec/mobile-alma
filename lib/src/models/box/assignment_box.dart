@@ -1,4 +1,5 @@
 import 'package:alma/src/models/box/box.dart';
+import 'package:alma/src/models/box/option_box.dart';
 import 'package:objectbox/objectbox.dart';
 
 @Entity()
@@ -12,7 +13,8 @@ class AssignmentBox {
     this.answer,
     this.hiddenText,
     this.kind,
-    this.classes
+    this.classes,
+    this.options,
   });
 
   int? id;
@@ -25,4 +27,5 @@ class AssignmentBox {
   String? kind;
   bool? done;
   List<ClassRoomBox>? classes;
+  List<OptionBox>? options;
 }

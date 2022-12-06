@@ -1,3 +1,4 @@
+import 'package:alma/src/models/assignment/options.dart';
 import 'package:alma/src/models/box/assignment_box.dart';
 import 'package:alma/src/models/models.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -17,7 +18,7 @@ class Assignment {
     this.updatedAt,
     this.kind,
     this.classes,
-    this.alternatives,
+    this.options,
   });
 
   factory Assignment.fromJson(Map<String, dynamic> json) => _$AssignmentFromJson(json);
@@ -30,6 +31,7 @@ class Assignment {
         answer: box.answer,
         hiddenText: box.hiddenText,
         kind: box.kind,
+        options: box.options?.map(Option.fromBox).toList(),
       );
 
   Map<String, dynamic> toJson() => _$AssignmentToJson(this);
@@ -43,6 +45,7 @@ class Assignment {
         hiddenText: hiddenText,
         kind: kind,
         classes: classes?.map((e) => e.toBox()).toList(),
+        options: options?.map((e) => e.toBox()).toList(),
       );
 
   int? id;
@@ -57,5 +60,5 @@ class Assignment {
 
   @JsonKey(name: 'class')
   List<ClassRoom>? classes;
-  List<Alternative>? alternatives;
+  List<Option>? options;
 }

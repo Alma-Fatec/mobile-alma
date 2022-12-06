@@ -97,6 +97,7 @@ class _FormApplicationState extends State<FormLogin> {
                 listener: (context, state) {
                   if (state is Success) {
                     context.read<ApplicationBloc>().add(Fetch(userId: state.user!.id!));
+                    Future.delayed(const Duration(seconds: 1));
                     Navigator.pushNamedAndRemoveUntil(context, HomePage.route, (_) => false);
                   }
 
