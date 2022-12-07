@@ -17,6 +17,7 @@ import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 import 'src/models/box/assignment_box.dart';
 import 'src/models/box/class_block_box.dart';
 import 'src/models/box/class_room_box.dart';
+import 'src/models/box/option_box.dart';
 import 'src/models/box/user_box.dart';
 import 'src/models/box/user_metadata.dart';
 
@@ -207,6 +208,35 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(6, 8455742398924132228),
+      name: 'OptionBox',
+      lastPropertyId: const IdUid(4, 5577026965234778934),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 2839966423412621306),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 6387569605410666831),
+            name: 'text',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 4668364613087819883),
+            name: 'file',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 5577026965234778934),
+            name: 'isCorrect',
+            type: 1,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -230,7 +260,7 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(5, 2237150591293992667),
+      lastEntityId: const IdUid(6, 8455742398924132228),
       lastIndexId: const IdUid(0, 0),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
@@ -474,6 +504,43 @@ ModelDefinition getObjectBoxModel() {
                 .vTableGetNullable(buffer, rootOffset, 12);
 
           return object;
+        }),
+    OptionBox: EntityDefinition<OptionBox>(
+        model: _entities[5],
+        toOneRelations: (OptionBox object) => [],
+        toManyRelations: (OptionBox object) => {},
+        getId: (OptionBox object) => object.id,
+        setId: (OptionBox object, int id) {
+          object.id = id;
+        },
+        objectToFB: (OptionBox object, fb.Builder fbb) {
+          final textOffset =
+              object.text == null ? null : fbb.writeString(object.text!);
+          final fileOffset =
+              object.file == null ? null : fbb.writeString(object.file!);
+          fbb.startTable(5);
+          fbb.addInt64(0, object.id ?? 0);
+          fbb.addOffset(1, textOffset);
+          fbb.addOffset(2, fileOffset);
+          fbb.addBool(3, object.isCorrect);
+          fbb.finish(fbb.endTable());
+          return object.id ?? 0;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = OptionBox(
+              id: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 4),
+              text: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 6),
+              file: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 8),
+              isCorrect: const fb.BoolReader()
+                  .vTableGetNullable(buffer, rootOffset, 10));
+
+          return object;
         })
   };
 
@@ -603,4 +670,22 @@ class UserMetadata_ {
   /// see [UserMetadata.lastAssignmentId]
   static final lastAssignmentId =
       QueryIntegerProperty<UserMetadata>(_entities[4].properties[4]);
+}
+
+/// [OptionBox] entity fields to define ObjectBox queries.
+class OptionBox_ {
+  /// see [OptionBox.id]
+  static final id = QueryIntegerProperty<OptionBox>(_entities[5].properties[0]);
+
+  /// see [OptionBox.text]
+  static final text =
+      QueryStringProperty<OptionBox>(_entities[5].properties[1]);
+
+  /// see [OptionBox.file]
+  static final file =
+      QueryStringProperty<OptionBox>(_entities[5].properties[2]);
+
+  /// see [OptionBox.isCorrect]
+  static final isCorrect =
+      QueryBooleanProperty<OptionBox>(_entities[5].properties[3]);
 }

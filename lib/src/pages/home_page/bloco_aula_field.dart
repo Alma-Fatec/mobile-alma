@@ -1,79 +1,86 @@
-import 'package:alma/src/blocs/application_bloc/application_bloc.dart';
 import 'package:alma/src/blocs/classblock_bloc/classblock_bloc.dart';
 import 'package:alma/src/blocs/navigation_bloc/navigation_bloc.dart' as nav;
-import 'package:alma/src/services/classblock_service.dart';
+import 'package:alma/src/models/class_block/class_block.dart';
 import 'package:alma/src/utils/colors.dart';
 import 'package:alma/src/widgets/block_navigation_listener.dart';
 import 'package:alma/src/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
-// ignore: must_be_immutable
-class BlocoAulaField extends StatelessWidget {
-  BlocoAulaField({Key? key}) : super(key: key);
+class BlocoAulaField extends StatefulWidget {
+  const BlocoAulaField({Key? key}) : super(key: key);
 
-  late ClassBlockBloc _bloc;
+  @override
+  State<BlocoAulaField> createState() => _BlocoAulaFieldState();
+}
+
+class _BlocoAulaFieldState extends State<BlocoAulaField> {
+  late ClassBlockBloc _classBlockBloc;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _classBlockBloc = context.read<ClassBlockBloc>();
+  }
 
   @override
   Widget build(BuildContext context) {
-    _bloc = ClassBlockBloc(classblockService: Provider.of<ClassblockService>(context, listen: false));
-
     return BlocBuilder<ClassBlockBloc, ClassblockState>(
-        bloc: _bloc..add(LoadClassblockByUserId(userId: context.read<ApplicationBloc>().state.currentUser?.id)),
-        builder: (context, state) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const CustomText(
-                text: "Bloco de aula:",
-                fontFamily: "Montserrat",
-                fontSize: 16,
-                fontWeight: FontWeight.w900,
-                color: AlmaColors.secondaryTextColorAlma,
-              ),
-              BlockNavigationListener(
-                child: InkWell(
-                  onTap: () {
-                    final classBlockId = context.read<ApplicationBloc>().state.currentBlock?.id ?? '';
-                    if (classBlockId != '') {
-                      context.read<nav.NavigationBloc>().add(nav.Initialise(blockId: classBlockId));
-                    }
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 5),
-                    constraints: const BoxConstraints(
-                      minWidth: 370,
-                      minHeight: 280,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AlmaColors.blueAlma,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.black54,
-                          blurRadius: 15.0,
-                          offset: Offset(0.0, 0.75),
-                        )
-                      ],
-                    ),
-                    child: state is Loaded
-                        ? _showClassblock(state)
-                        : state is Error
-                            ? _showClassblock()
-                            : const SizedBox(width: 24, height: 24, child: CircularProgressIndicator()),
+      bloc: _classBlockBloc,
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const CustomText(
+              text: "Bloco de aula:",
+              fontFamily: "Montserrat",
+              fontSize: 16,
+              fontWeight: FontWeight.w900,
+              color: AlmaColors.secondaryTextColorAlma,
+            ),
+            BlockNavigationListener(
+              child: InkWell(
+                onTap: () {
+                  final classBlockId = state.currentBlock?.id ?? '';
+                  if (classBlockId != '') {
+                    context.read<nav.NavigationBloc>().add(nav.Initialise(blockId: classBlockId));
+                  }
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(top: 5),
+                  constraints: const BoxConstraints(
+                    minWidth: 370,
+                    minHeight: 280,
                   ),
+                  decoration: BoxDecoration(
+                    color: AlmaColors.blueAlma,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black54,
+                        blurRadius: 15.0,
+                        offset: Offset(0.0, 0.75),
+                      )
+                    ],
+                  ),
+                  child: state.isLoading!
+                      ? _showClassblock()
+                      : state.isError!
+                          ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator())
+                          : _showClassblock(state.currentBlock),
                 ),
               ),
-              _progressTitle(),
-              _showProgress(),
-            ],
-          );
-        });
+            ),
+            _progressTitle(),
+            _showProgress(),
+          ],
+        );
+      },
+    );
   }
 
-  Column _showClassblock([Loaded? loaded]) {
-    final classBlock = loaded?.classBlock;
+  Column _showClassblock([ClassBlock? classBlock]) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

@@ -1,6 +1,6 @@
 import 'package:alma/speaker_controller.dart';
-import 'package:alma/src/blocs/application_bloc/application_bloc.dart';
 import 'package:alma/src/blocs/assignment_bloc/assignment_bloc.dart';
+import 'package:alma/src/blocs/classblock_bloc/classblock_bloc.dart';
 import 'package:alma/src/blocs/navigation_bloc/navigation_bloc.dart';
 import 'package:alma/src/pages/pages.dart';
 import 'package:alma/src/utils/nav.dart';
@@ -63,7 +63,7 @@ class _BlockNavigationListenerState extends State<BlockNavigationListener> {
     return BlocListener<AssignmentBloc, AssignmentState>(
       listener: (context, state) {
         if (state is Checked) {
-          final blockId = context.read<ApplicationBloc>().state.currentBlock?.id;
+          final blockId = context.read<ClassBlockBloc>().state.currentBlock?.id;
           context.read<NavigationBloc>().add(LoadResults(blockId: blockId ?? ''));
         }
       },

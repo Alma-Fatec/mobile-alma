@@ -4,7 +4,6 @@ part of 'application_bloc.dart';
 class ApplicationState with _$ApplicationState {
   factory ApplicationState({
     @Default(null) User? currentUser,
-    @Default(null) ClassBlock? currentBlock,
     @Default(false) bool? isInitialised,
   }) = _ApplicationState;
 

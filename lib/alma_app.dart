@@ -1,15 +1,16 @@
 import 'package:alma/initialise_application.dart';
+import 'package:alma/initialise_class_block.dart';
 import 'package:alma/speaker_controller.dart';
 import 'package:alma/src/api/alma_api.dart';
 import 'package:alma/src/api/alma_interceptor_token.dart';
 import 'package:alma/src/blocs/application_bloc/application_bloc.dart';
 import 'package:alma/src/blocs/assignment_bloc/assignment_bloc.dart';
+import 'package:alma/src/blocs/classblock_bloc/classblock_bloc.dart';
 import 'package:alma/src/blocs/navigation_bloc/navigation_bloc.dart';
 import 'package:alma/src/repositories/assignment_repository.dart';
 import 'package:alma/src/repositories/class_block_repository.dart';
 import 'package:alma/src/repositories/class_room_repository.dart';
 import 'package:alma/src/repositories/user_repository.dart';
-import 'package:alma/src/services/application_service.dart';
 import 'package:alma/src/services/assignment_service.dart';
 import 'package:alma/src/services/classblock_service.dart';
 import 'package:alma/src/services/navigation_service.dart';
@@ -37,6 +38,7 @@ class AlmaApp extends StatelessWidget {
     final classblockService = ClassblockService(
       classBlockRepository: classBlockRepository,
       classRoomRepository: classRoomRepository,
+      assignmentRepository: assignmentRepository,
     );
     final userService = UserService(
       userRepository: UserRepository(
@@ -44,28 +46,23 @@ class AlmaApp extends StatelessWidget {
         boxProvider: ObjectBoxProvider.get(),
       ),
     );
-    final applicationService = ApplicationService(
-      blockRepository: classBlockRepository,
-      classRoomRepository: classRoomRepository,
-      assignmentRepository: assignmentRepository,
-    );
     final navigationService = NavigationService(
       classRoomRepository: classRoomRepository,
       assignmentRepository: assignmentRepository,
     );
     final assignmentService = AssignmentService(assignmentRepository: assignmentRepository);
-    final applicationBloc = ApplicationBloc(
-      applicationService: applicationService,
+    final applicationBloc = ApplicationBloc(userService: userService);
+    final AudioSpeakerController audioController = AudioSpeakerController(AudioControls());
+    final classBlockBloc = ClassBlockBloc(
+      classblockService: classblockService,
       userService: userService,
     );
-    final AudioSpeakerController audioController = AudioSpeakerController(AudioControls());
     final assignmentBloc = AssignmentBloc(assignmentService: assignmentService);
     final navigationBloc = NavigationBloc(navigationService: navigationService);
 
     return MultiProvider(
       providers: [
         Provider<UserService>.value(value: userService),
-        Provider<ClassblockService>.value(value: classblockService),
         ChangeNotifierProvider<AudioSpeakerController>.value(value: audioController)
       ],
       child: MultiBlocProvider(
@@ -73,6 +70,7 @@ class AlmaApp extends StatelessWidget {
           BlocProvider<ApplicationBloc>.value(value: applicationBloc),
           BlocProvider<NavigationBloc>.value(value: navigationBloc),
           BlocProvider<AssignmentBloc>.value(value: assignmentBloc),
+          BlocProvider<ClassBlockBloc>.value(value: classBlockBloc),
         ],
         child: MaterialApp(
           title: 'Alma',
@@ -94,6 +92,7 @@ class AlmaApp extends StatelessWidget {
             ),
           ),
           routes: {
+            InitialiseClassBlock.route: (context) => const InitialiseClassBlock(),
             SplashScreen.route: (context) => const SplashScreen(),
             HomePage.route: (context) => const HomePage(),
             LoginPage.route: (context) => const LoginPage(),

@@ -1,3 +1,4 @@
+import 'package:alma/initialise_class_block.dart';
 import 'package:alma/src/blocs/application_bloc/application_bloc.dart';
 import 'package:alma/src/pages/home_page/aulas_recentes_fields.dart';
 import 'package:alma/src/pages/home_page/bloco_aula_field.dart';
@@ -46,19 +47,15 @@ class _HomePageState extends State<HomePage> {
       body: CustomBody(
         topMargin: 0,
         child: RefreshIndicator(
-          onRefresh: () async {
-            final appBloc = BlocProvider.of<ApplicationBloc>(context);
-            final user = appBloc.state.currentUser;
-            appBloc.add(Fetch(userId: user!.id!));
-          },
+          onRefresh: () => Navigator.pushNamedAndRemoveUntil(context, InitialiseClassBlock.route, (route) => false),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 42),
+              children: const [
+                SizedBox(height: 42),
                 Center(child: BlocoAulaField()),
-                const SizedBox(height: 39),
-                const AulasRecentesField(),
+                SizedBox(height: 39),
+                AulasRecentesField(),
               ],
             ),
           ),

@@ -1,4 +1,4 @@
-import 'package:alma/src/blocs/application_bloc/application_bloc.dart';
+import 'package:alma/src/blocs/classblock_bloc/classblock_bloc.dart';
 import 'package:alma/src/blocs/navigation_bloc/navigation_bloc.dart';
 import 'package:alma/src/models/models.dart';
 import 'package:alma/src/utils/colors.dart';
@@ -57,7 +57,7 @@ class ClassroomPage extends StatelessWidget {
                   CustomButton(
                     onPressed: () => context
                         .read<NavigationBloc>()
-                        .add(LoadResults(blockId: context.read<ApplicationBloc>().state.currentBlock?.id ?? '')),
+                        .add(LoadResults(blockId: context.read<ClassBlockBloc>().state.currentBlock?.id ?? '')),
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Stack(

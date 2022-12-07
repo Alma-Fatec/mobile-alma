@@ -187,9 +187,38 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "6:8455742398924132228",
+      "lastPropertyId": "4:5577026965234778934",
+      "name": "OptionBox",
+      "properties": [
+        {
+          "id": "1:2839966423412621306",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6387569605410666831",
+          "name": "text",
+          "type": 9
+        },
+        {
+          "id": "3:4668364613087819883",
+          "name": "file",
+          "type": 9
+        },
+        {
+          "id": "4:5577026965234778934",
+          "name": "isCorrect",
+          "type": 1
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "5:2237150591293992667",
+  "lastEntityId": "6:8455742398924132228",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
